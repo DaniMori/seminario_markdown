@@ -100,7 +100,8 @@
 
 ### Otros tipos de código
 
-- Ejemplo: Stata
+- Stata
+- Ejemplo: Informe de variables "outcome"
 
 ## Conclusión
 
