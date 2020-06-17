@@ -1,0 +1,292 @@
+---
+title: "Markdown (y Rmarkdown)"
+subtitle: "Documentos sencillos, rápidos, y versátiles"
+author: "Daniel Morillo"
+institute: "Universidad Autónoma de Madrid"
+date: "`r format(lubridate::today())`"
+output:
+  xaringan::moon_reader:
+    keep_md: yes
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+---
+
+```{r setup, include=FALSE}
+# Libraries:
+library(pacman)
+p_load(knitr, htmltools)
+
+# Configuration:
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, results = 'asis')
+
+# Constants:
+INTERVIEW_FILE_PATH <- "www/Protocolo_entrevista_experiencias.html"
+DINGUS_URL          <- "http://spec.commonmark.org/dingus/"
+PANDOC_URL          <- "http://pandoc.org/"
+
+HTML_EXAMPLE  <- "<center style='color:blue'>Estoy centrado y en azul</center>"
+LaTeX_EXAMPLE <- "$Y = \\beta_1 X + \\epsilon$"
+```
+
+
+# Bienvenidos/as
+
+```{r}
+tags$iframe(
+  src    = INTERVIEW_FILE_PATH,
+  width  = "100%",
+  height =  "70%"
+)
+```
+
+
+---
+
+# Introducción a Markdown
+
+.center[**Markdown** es...]
+
+--
+
+.center[un _lenguaje de marcado_:]
+
+--
+
+.center[Texto]
+
+--
+
+.center[+]
+
+--
+
+.center[Marcas de formato]
+
+--
+
+```md
+  # Introducción a Markdown
+
+  **Markdown**...
+  
+  es un _lenguaje de marcado_:
+
+  Texto
+
+  +
+
+  Marcas de formato
+```
+
+(tiene trampa: hay más cosas para centrar el texto y hacerlo incremental)
+
+
+---
+
+# Introducción a Markdown
+
+.center[**Markdown** _también_ es...]
+
+--
+
+- un [_conversor_ a HTML](`r DINGUS_URL`):
+
+```{r}
+tags$iframe(
+  src    = DINGUS_URL,
+  width  = "100%",
+  height =  "50%"
+)
+```
+
+
+--
+
+Pero hay otros: [Pandoc](`r PANDOC_URL`)
+
+
+---
+
+# Pandoc
+
+Permite convertir entre:
+
+- HTML
+
+- Word
+
+- PDF
+
+(entre muchos otros:)
+
+```{r}
+tags$iframe(
+  src    = PANDOC_URL,
+  width  = "100%",
+  height =  "40%"
+)
+```
+
+
+---
+
+# ¿Por qué usar Markdown?
+
+Markdown es ...
+
+- altamente _legible_
+
+--
+
+  aunque puede incluir:
+
+  - HTML/CSS:
+  
+  ```html
+  `r HTML_EXAMPLE`
+  ```
+  
+  `r HTML_EXAMPLE`
+
+--
+
+  - LaTeX:
+  
+  	```TeX
+  	`r LaTeX_EXAMPLE`
+  	```
+  	
+  	`r LaTeX_EXAMPLE`
+
+---
+
+# ¿Por qué usar Markdown?
+
+Markdown es ...
+
+- Rápido: contenido ↔︎ formato
+
+--
+
+- Interoperable: **archivos de texto**
+
+--
+
+- Facilita la _colaboración_
+
+  - (Herramientas específicas)
+
+
+---
+
+# Pero...
+
+--
+
+- No es _WYSIWYG_
+
+.center[(what you see is what you get)]
+
+
+---
+
+# Aprender Markdown
+
+Es **extremadamente sencillo**:
+
+
+
+---
+
+## Rmarkdown
+
+### Extensión de markdown
+
+- encabezado
+- markdown
+- Código R
+
+	- Cálculos
+	- Gráficos
+	- Tablas
+
+---
+
+### Formatos
+
+- HTML
+
+	- Página web
+	- Blog
+	- presentación
+
+		- revealjs
+		- (Esta presentación)
+
+	- dashboard
+
+---
+
+- PPT
+- Libro (bookdown)
+
+	- web
+	- PDF
+	- ePub
+
+---
+
+- Artículo
+
+	- Ejemplo
+
+		- Crear bibliografía
+		- Usar plantilla
+		- Generar submission
+		- Copiar a plantilla nueva
+		- Generar submission
+
+	- Salida
+
+		- LaTeX
+		- PDF
+
+---
+
+### Otros tipos de código
+
+- Stata
+- Ejemplo: Informe de variables "outcome"
+
+---
+
+## Conclusión
+
+### Legible
+
+### Fácil de editar
+
+### Fácil de mantener (control de versiones)
+
+### Productividad: Separa contenido y composición
+
+- Mejor productividad cuando te acostumbras a no WYSIWYG
+
+---
+
+## Continuación
+
+### Tutorial
+
+### Chuleta
+
+---
+
+### Retos
+
+- Replicar manual de instalación de OneDrive
+
+	- Usar enlaces internos
