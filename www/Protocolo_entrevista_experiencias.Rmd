@@ -1,0 +1,157 @@
+---
+output:
+  revealjs::revealjs_presentation:
+    transition: none
+    transitionSpeed: fast
+    theme: white
+    slide_level: 1
+    self_contained: true
+---
+
+# {#inicio}
+
+```{css styles, echo=FALSE}
+.reveal section p {
+  font-size: 0.55em;
+  vertical-align: top;
+  text-align: left;
+}
+```
+
+<h1>Entrevista abierta de experiencias de participación</h1>
+
+## Preparación:
+
+**[Preparar libreta y boli para anotaciones]**
+
+[Continuar](#presentacion)
+
+
+# Presentacion
+
+Hola, buenos/as días/tardes. Mi nombre es Daniel Morillo,
+soy investigador de la Universidad Autónoma de Madrid
+en el proyecto nacional sobre salud y bienestar impulsado por
+el Parc Sanitari Sant Joan de Déu de Barcelona,
+el Hospital Universitario de la Princesa de Madrid
+y la Universidad Autónoma de Madrid.
+Quisiera hablar con Don/Doña _____________, por favor. ¿Está disponible?
+
+
+[Sí, se pone](#se-pone)
+
+[Sí, soy yo](#soy-yo)
+
+[No está](#adios)
+
+[Ha fallecido](#ha-fallecido)
+
+
+# Se pone
+
+Hola, buenos/as días/tardes. Mi nombre es Daniel Morillo,
+soy investigador de la Universidad Autónoma de Madrid
+en el proyecto nacional sobre salud y bienestar impulsado por
+el Parc Sanitari Sant Joan de Déu de Barcelona,
+el Hospital Universitario de la Princesa de Madrid
+y la Universidad Autónoma de Madrid.
+¿Tengo el gusto de hablar con Don/Doña _____________?
+
+[Sí, soy yo](#soy-yo)
+
+[No](#no-soy-yo)
+
+
+# No soy yo
+
+Ah, discúlpeme las molestias. ¿Sería posible que ________ se pusiera al
+teléfono?
+
+
+[Sí, se pone](#se-pone)
+
+[Sí, soy yo](#soy-yo)
+
+[No está](#adios)
+
+[Ha fallecido](#ha-fallecido)
+
+
+# Soy yo
+
+Buenos/as días/tardes, muchas gracias por atenderme.
+Como seguramente recordará usted, participó en ________ en nuestro estudio;
+una persona fue a entrevistarle a su casa, y le hizo una serie de preguntas
+sobre salud, bienestar, alimentación, etc.,
+y le tomó algunas medidas médicas como la tensión, fuerza de agarre...
+¿Se acuerda usted de esta entrevista?
+
+
+[Sí, me acuerdo](#informacion)
+
+[No me acuerdo](#adios)
+
+
+# Informacion
+
+Verá, en este momento estamos planificando una nueva recogida de datos,
+en la que varias personas van a volver a entrevistar a los participantes al
+cabo de tres años, para conocer cómo ha evolucionado su salud y bienestar
+en este tiempo.
+Estamos llamando a algunas de las personas que participaron voluntariamente
+en en aquel momento, para pedirles que nos respondan brevemente a algunas
+preguntas sobre su experiencia como participantes en nuestro estudio.
+
+¿Sería usted tan amable de responder unas breves preguntas sobre lo que recuerda
+de la entrevista?
+No nos tomará más de cinco minutos.
+
+[Sí, acepto](#preguntas)
+
+[No, no acepto](#adios)
+
+
+# Preguntas
+
+De acuerdo, muchas gracias entonces. Vamos con las preguntas.
+
+
+¿Recuerda a la persona que le entrevisto?
+
+¿Qué es lo que más recuerda de ella?
+
+¿Se sintió cómodo/a con la entrevista?
+
+¿Qué fue lo que más le gusto de la entrevista? ¿Y lo que menos?
+
+¿Qué le aporta a título personal la participación en el estudio?
+
+
+De acuerdo, eso sería todo. ¿Tiene usted alguna pregunta o sugerencia?
+
+**[Responder dudas y escuchar sugerencias activamente]**
+
+
+Eso sería todo, muchas gracias por su atención, y buenos/as días/tardes.
+
+[Fin](#fin)
+
+
+# Ha fallecido
+
+Lo lamento muchísimo,
+le doy mi más sentido pésame y muchas gracias por atenderme.
+
+[Fin](#fin)
+
+
+# Adios
+
+De acuerdo entonces, muchas gracias por atenderme y disculpe las molestias.
+
+[Fin](#fin)
+
+
+# Fin
+
+[Volver a inicio](#inicio)
