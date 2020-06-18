@@ -1,0 +1,591 @@
+---
+title:
+author: "Daniel Morillo"
+institute: "Universidad Autónoma de Madrid"
+date: "`r format(lubridate::today(), '%d de %B de %Y')`"
+output:
+  revealjs::revealjs_presentation:
+    transition: slide
+    transitionSpeed: slow
+    theme: serif
+    smart: true
+    center: false
+    incremental: false
+    slide_level: 1
+    fig_width: 7
+    fig_height: 4.5
+    fig_caption: false
+    self_contained: true
+    reveal_options:
+      slideNumber: true
+      previewLinks: false
+      pdfSeparateFragments: false
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+# Libraries:
+library(pacman)
+p_load(knitr, tidyverse, lubridate, htmltools)
+
+# Configuration:
+opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, results = 'asis')
+
+# Constants:
+
+FILE_PATH_INTERVIEW <- "www/Protocolo_entrevista_experiencias.html"
+
+LOGO_MARKDOWN  <- "www/md_logo.png"
+LOGO_RMARKDOWN <- "www/rmarkdown_logo.png"
+
+ICON_CONTENT   <- "www/content.png"
+ICON_FORMAT    <- "www/format.png"
+ICON_DOWNARROW <- "www/down_arrow.gif"
+ICON_COLLAB    <- "www/doc_collaborate.png"
+
+IMG_EXTENDED_SYNTAX <- "www/extended_cheatsheet.png"
+
+URL_DINGUS        <- "http://spec.commonmark.org/dingus/"
+URL_PANDOC        <- "http://pandoc.org/"
+URL_BASICS_MD     <- "https://daringfireball.net/projects/markdown/basics"
+URL_EXTENSIONS_MD <-
+  "https://www.markdownguide.org/cheat-sheet/#extended-syntax"
+
+URL_ICON_CONTENT <- "https://www.iconfinder.com/icons/465052/compose_content_document_pencil_script_sheet_write_icon"
+URL_ICON_FORMAT  <- "https://www.iconfinder.com/icons/887655/brush_content_format_graphic_paint_painter_tool_icon"
+URL_ICON_COLLAB  <- "https://www.pngkey.com/detail/u2w7i1i1r5t4t4u2_collaboration-icon-icon/"
+URL_LOGO_MD      <- "" ## TODO: Complete
+URL_LOGO_RMD     <- "" ## TODO: Complete
+URL_DOWN_ARROW   <- "https://media.giphy.com/media/9PekRRQ0WlrRVwynAk/giphy.gif"
+
+EXAMPLE_HTML   <- "<center style='color:blue'>Estoy centrado y en azul</center>"
+EXAMPLE_LaTeX  <- "$Y = \\beta_1 X + \\epsilon$"
+EXAMPLE_WORD   <- "www/sample_wordfile.txt"
+EXAMPLE_MD     <- "https://daringfireball.net/projects/markdown/syntax"
+EXAMPLE_EDITOR <- "https://stackedit.io/app#"
+```
+
+#
+
+```{css styles, echo=FALSE}
+## Warning!! No usar NUNCA 'include=FALSE' en un chunk css
+.reveal p {
+  text-align: left;
+}
+
+.reveal ul {
+  display: block;
+}
+
+.reveal section img {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.container{
+    display: flex;
+}
+
+.col{
+    flex: 1;
+}
+```
+
+```{r}
+div(
+  class = "container",
+  div(class = "col", img(src = LOGO_MARKDOWN,  height="120")),
+  div(class = "col", img(src = LOGO_RMARKDOWN, height="150"))
+)
+```
+
+## Markdown (y Rmarkdown)
+
+### Documentos sencillos, rápidos, y versátiles
+
+#### Daniel Morillo
+
+#### Universidad Autónoma de Madrid
+
+##### `r today() %>% format('%d de %B de %Y')`
+
+<!--
+
+# Bienvenidos/as
+
+```{r}
+tags$iframe(src = FILE_PATH_INTERVIEW, width = 800, height = 600)
+```
+
+
+# Introducción a Markdown
+
+<br>
+
+### ¿Qué es Markdown?
+
+```{r}
+img(src = LOGO_MARKDOWN,  height="180")
+```
+
+
+# Introducción a Markdown
+
+<br>
+
+<div class="container">
+<div class="col">
+  
+<div class="fragment">**Markdown** es...</div>
+    
+<div class="fragment">un _lenguaje de marcado_:</div>
+    
+<br>
+
+<div class="fragment">Texto</div>
+    
+<div class="fragment">\+</div>
+    
+<div class="fragment">Marcas de formato</div>
+
+</div>
+
+<div class="col fragment">
+```md
+# Introducción a Markdown
+
+**Markdown** es...
+
+un _lenguaje de marcado_:
+
+Texto
+
+\+
+
+Marcas de formato
+```
+</div>
+
+</div>
+
+
+<div class="fragment">
+
+<small>
+Tiene "trampa":  
+Elementos incrementales, columnas
+</small>
+
+</div>
+
+
+# Introducción a Markdown
+
+**Markdown** _también_ es...
+
+<div class="fragment">
+>- un [_conversor_ a HTML](`r URL_DINGUS`):
+
+```{r}
+tags$iframe(
+  src    = URL_DINGUS,
+  width  = "100%",
+  height = 400
+)
+```
+</div>
+
+<div class="fragment">Pero hay otros: [Pandoc](`r URL_PANDOC`)</div>
+
+
+# Pandoc
+
+Permite convertir a:
+
+<div class="container">
+
+<div class="col fragment">
+- HTML
+</div>
+
+<div class="col fragment">
+- Word
+</div>
+
+<div class="col fragment">
+- PDF
+</div>
+
+</div>
+
+<br>
+
+```{r}
+div(
+  class = "fragment",
+  tags$iframe(
+    src    = URL_PANDOC,
+    width  = "100%",
+    height =  400
+  )
+)
+```
+
+# ¿Por qué usar Markdown? {data-transition="slide-in fade-out"}
+
+Es *muy legible*:
+
+
+<div class="container">
+
+<div class="col">
+```md
+# Título 1
+
+
+## Título 2
+
+**negrita** y _cursiva_
+
+* puntos
+
+* importantes
+
+1. lista de
+
+1. elementos
+
+1. numerados
+```
+</div>
+
+<div class="col">
+
+<h2>Título 1</h2>
+
+<h3>Título 2</h3>
+
+**negrita** y _cursiva_
+
+* puntos
+
+* importantes
+
+1. lista de
+
+1. elementos
+
+1. numerados
+
+</div>
+
+</div>
+
+
+# ¿Por qué usar Markdown? {data-transition="fade-in slide-out"}
+
+Es *muy legible*:
+
+
+<div class="container">
+
+<div class="col">
+```md
+### Título 3
+
+#### Título 4
+
+[enlace](https://www.ccomsuam.org/)
+
+![logo MD](`r LOGO_MARKDOWN`)
+
+>Si buscas resultados distintos,
+>no hagas siempre lo mismo.
+
+--Albert Einstein
+```
+</div>
+
+<div class="col">
+
+<small>
+
+<h2>Título 3</h2>
+
+<h3>Título 4</h3>
+
+[enlace](https://www.ccomsuam.org/)
+
+`r img(src = LOGO_MARKDOWN, height = 30)`
+
+>Si buscas resultados distintos,
+>no hagas siempre lo mismo.
+
+--Albert Einstein
+
+</small>
+
+</div>
+
+</div>
+
+
+# ¿Por qué usar Markdown? {data-transition="slide-in fade-out"}
+
+Aunque permite insertar:
+
+
+<div class="fragment">
+- HTML/CSS:
+
+<br>
+
+```html
+`r EXAMPLE_HTML`
+```
+
+<br>
+
+`r EXAMPLE_HTML`
+</div>
+
+
+# ¿Por qué usar Markdown? {data-transition="fade-in slide-out"}
+
+Aunque permite insertar:
+
+
+- LaTeX:
+
+<br>
+
+```TeX
+`r EXAMPLE_LaTeX`
+```
+
+<br>
+
+`r EXAMPLE_LaTeX`
+
+
+# ¿Por qué usar Markdown?
+
+Es *muy rápido*:
+
+<center>
+
+<div class="container fragment" style="width:50%">
+
+<div class="col">
+`r img(src = ICON_CONTENT, height = 120)`
+</div>
+
+<div class="col"><br>Contenido</div>
+
+</div>
+
+
+<div class="fragment">
+`r img(src = ICON_DOWNARROW, height = 120)`
+</div>
+
+
+<div class="container fragment" style="width:50%">
+
+<div class="col">
+`r img(src = ICON_FORMAT, height = 120)`
+</div>
+
+<div class="col"><br>Formato</div>
+
+</div>
+
+</center>
+
+
+# ¿Por qué usar Markdown?
+
+Es *interoperable*
+
+<div class="container">
+
+<div class="col fragment">
+MS Word:
+
+```{r}
+tags$iframe(src = EXAMPLE_WORD, width = "100%", height = 520)
+```
+</div>
+
+<div class="col fragment">
+[Markdown](`r EXAMPLE_MD`):
+
+```{r}
+tags$iframe(src = paste0(EXAMPLE_MD, ".text"), width = "120%", height = 450)
+```
+</div>
+
+</div>
+
+
+# Pero...
+
+- No es _WYSIWYG_:
+
+<center>_(what you see is what you get)_</center>
+
+<br>
+
+```{r}
+tags$iframe(
+  class  = "fragment",
+  src    = EXAMPLE_EDITOR,
+  width  = "100%",
+  height = 400
+)
+```
+
+
+# Pero...
+
+- Requiere herramientas específicas de colaboración
+
+<br>
+
+```{r}
+img(src = ICON_COLLAB, width = 400)
+```
+
+
+# Aprender Markdown
+
+Es [**extremadamente sencillo**][MD basics]:
+
+```{r}
+tags$iframe(
+  src    = URL_BASICS_MD,
+  width  = "100%",
+  height = 550
+)
+```
+
+[MD basics]: `r URL_BASICS_MD`
+
+
+# Aprender Markdown
+
+También conviene conocer [*extensiones comunes*][MD extensions]:
+
+```{r}
+img(src = IMG_EXTENDED_SYNTAX, height = 600)
+```
+
+[MD extensions]: `r URL_EXTENSIONS_MD`
+-->
+
+
+# Rmarkdown
+
+<br>
+
+### ¿Qué es Rmarkdown?
+
+```{r}
+img(src = LOGO_RMARKDOWN,  height="220")
+```
+
+
+# Rmarkdown
+
+Extensión de markdown,  
+<p class="fragment">consiste en:</p>
+
+- encabezado
+
+- markdown
+
+- Código R
+
+	- Cálculos
+	- Gráficos
+	- Tablas
+
+---
+
+### Formatos
+
+- HTML
+
+	- Página web
+	- Blog
+	- presentación
+
+		- revealjs
+		- (Esta presentación)
+
+	- dashboard
+
+---
+
+- PPT
+- Libro (bookdown)
+
+	- web
+	- PDF
+	- ePub
+
+---
+
+- Artículo
+
+	- Ejemplo
+
+		- Crear bibliografía
+		- Usar plantilla
+		- Generar submission
+		- Copiar a plantilla nueva
+		- Generar submission
+
+	- Salida
+
+		- LaTeX
+		- PDF
+
+---
+
+### Otros tipos de código
+
+- Stata
+- Ejemplo: Informe de variables "outcome"
+
+---
+
+## Conclusión
+
+### Legible
+
+### Fácil de editar
+
+### Fácil de mantener (control de versiones)
+
+### Productividad: Separa contenido y composición
+
+- Mejor productividad cuando te acostumbras a no WYSIWYG
+
+---
+
+## Continuación
+
+### Tutorial
+
+### Chuleta
+
+---
+
+### Retos
+
+- Replicar manual de instalación de OneDrive
+
+	- Usar enlaces internos
