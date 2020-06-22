@@ -1,0 +1,114 @@
+---
+title:        "Niveles de ocupación laboral recodificado"
+author:       "Daniel Morillo"
+date:         "`r format(lubridate::today(), '%d de %B de %Y')`"
+institute:    CCOMS, Universidad Autónoma de Madrid
+bibliography: Ejemplo_rmarkdown.bib
+csl:          apa-old-doi-prefix.csl
+output:
+  pdf_document:
+    toc:      yes
+    df_print: kable
+    keep_tex: true
+    keep_md:  true
+  html_document:
+    df_print:  paged
+    toc:       yes
+    toc_float: yes
+  word_document:
+    toc:            yes
+    df_print:       kable
+    keep_md:        yes
+---
+
+```{r setup, echo=FALSE}
+library(pacman)
+p_load(knitr, haven, tidyverse)
+
+FILE_SURVEY_BASELINE <- "C:/Users/Mori/Universidad Autonoma de Madrid/marta.miret@uam.es - Bases de datos maestras Edad con Salud/Ola_1_Linea_base/All_COURAGE_VFINAL.sav"
+
+opts_chunk$set(echo = FALSE, cache = TRUE, results = 'asis')
+```
+
+
+```{r, cache=TRUE}
+raw_baseline <- read_spss(FILE_SURVEY_BASELINE) %>% filter(
+  q0001_rc  == 724,        ## Spanish subsample
+  number_id != "724002691" ## Subject that withdrew consent
+)
+```
+
+# Introducción
+
+Alguien dijo {++ Referencia pendiente ++}
+que es necesario incluir el nivel ocupacional como covariable.
+
+
+# Método
+
+## Recodificación de la variable *nivel ocupacional*
+
+La variable se recodifica siguiendo el procedimiento habitual
+[@repousi_depression_2018; @lara_cognitive_2017].
+
+```{r recode-occupation}
+raw_baseline <- raw_baseline %>% mutate(
+  # OCCUPATION:
+  occupation_bs = Q1510_CATOCCFINAL %>% zap_labels() %>% {
+    case_when(
+      . %in% c(933L, 9111:9629)            ~ 0,
+      . %in% c(
+        832L, 83L, 723L, 8111:8350, 7111:7534, 6111:6320, 54L, 513L, 5112:5419
+      )                                    ~ 1,
+      . %in% c(4110:4419, 351L, 3112:3435) ~ 2,
+      . %in% c(241L, 23L, 2141:2659)       ~ 3,
+      . %in% c(110L, 1120:1420)            ~ 4
+    )
+  } %>% ordered(
+    levels = 0:4,
+    labels = c(
+      "No cualificado",
+      "Cualificado manual",
+      "Cualificado no manual",
+      "Profesional",
+      "Directivo"
+    )
+  ),
+  `Ocupación` = occupation_bs %>% fct_explicit_na("(Perdidos)")
+)
+```
+
+
+# Resultados
+
+La Figura 1 muestra la frecuencia absoluta de casos de cada nivel ocupacional.
+
+```{r occupation-level-barchart}
+raw_baseline %>%
+  ggplot(aes(x = `Ocupación`, fill = `Ocupación`)) +
+  geom_bar()                                       +
+  theme_minimal()                                  +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1)
+  )                                                +
+  ylab("Frecuencia")
+```
+
+La Tabla 1 muestra el número de valores perdidos por código de ocupación,
+junto a su etiqueta correspondiente.
+
+
+```{r missing-codes}
+raw_baseline                   %>%
+  filter(is.na(occupation_bs)) %>%
+  count(
+    Q1510_CATOCCFINAL,
+    Etiqueta = as_factor(Q1510_CATOCCFINAL),
+    name = "Perdidos"
+  )                            %>%
+  arrange(Perdidos %>% desc())
+```
+
+
+# Referencias
+

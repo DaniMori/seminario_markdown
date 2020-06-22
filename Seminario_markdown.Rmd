@@ -18,26 +18,30 @@ output:
     self_contained: true
     reveal_options:
       slideNumber: true
-      previewLinks: false
+      previewLinks: true
       pdfSeparateFragments: false
-editor_options:
-  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 # Libraries:
 library(pacman)
-p_load(knitr, tidyverse, lubridate, htmltools)
+p_load(knitr, tidyverse, lubridate, htmltools, leaflet)
 
 # Configuration:
 opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, results = 'asis')
 
 # Constants:
 
-FILE_PATH_INTERVIEW <- "www/Protocolo_entrevista_experiencias.html"
+FILE_PATH_INTERVIEW        <- "www/Protocolo_entrevista_experiencias.html"
+FILE_PATH_RMD_EXAMPLE      <- "www/ejemplo_Rmarkdown/Recoding_occupation.Rmd"
+FILE_PATH_ELSEVIER_EXAMPLE <-
+  "www/ejemplo_Rmarkdown/Elsevier_submission/Elsevier_submission.Rmd"
+FILE_PATH_SAGE_EXAMPLE     <-
+  "www/ejemplo_Rmarkdown/Sage_submission/Sage_submission.Rmd"
 
 LOGO_MARKDOWN  <- "www/md_logo.png"
 LOGO_RMARKDOWN <- "www/rmarkdown_logo.png"
+LOGO_R         <- "www/R_logo.png"
 
 ICON_CONTENT   <- "www/content.png"
 ICON_FORMAT    <- "www/format.png"
@@ -51,12 +55,33 @@ URL_PANDOC        <- "http://pandoc.org/"
 URL_BASICS_MD     <- "https://daringfireball.net/projects/markdown/basics"
 URL_EXTENSIONS_MD <-
   "https://www.markdownguide.org/cheat-sheet/#extended-syntax"
+URL_YAML_WIKI     <- "https://en.wikipedia.org/wiki/YAML"
+URL_FLEXDASHBOARD <- "https://rmarkdown.rstudio.com/flexdashboard/"
+URL_BLOGDOWN      <- "https://bookdown.org/yihui/blogdown/"
+URL_POWERPOINT    <-
+  "https://bookdown.org/yihui/rmarkdown/powerpoint-presentation.html"
+URL_REVEALJS      <- "https://bookdown.org/yihui/rmarkdown/revealjs.html"
+URL_WORD_DOCS     <- "https://bookdown.org/yihui/rmarkdown/word-document.html"
+URL_PDF_DOCS      <- "https://bookdown.org/yihui/rmarkdown/pdf-document.html"
+URL_HTML_DOCS     <- "https://bookdown.org/yihui/rmarkdown/pdf-document.html"
+URL_FORMATS       <- "https://rmarkdown.rstudio.com/formats.html"
+URL_RMARKDOWN_GD  <- "https://bookdown.org/yihui/rmarkdown/"
+URL_SELF_REF      <-
+  "https://github.com/DaniMori/seminario_markdown/blob/master/Seminario_markdown.Rmd"
+URL_BOOKDOWN      <- "https://bookdown.org/yihui/bookdown/"
+URL_HTML_BOOK     <- "https://bookdown.org/yihui/bookdown/html.html"
+URL_PDF_BOOK      <- "https://bookdown.org/yihui/bookdown/latexpdf.html"
+URL_EBOOK         <- "https://bookdown.org/yihui/bookdown/e-books.html"
 
-URL_ICON_CONTENT <- "https://www.iconfinder.com/icons/465052/compose_content_document_pencil_script_sheet_write_icon"
-URL_ICON_FORMAT  <- "https://www.iconfinder.com/icons/887655/brush_content_format_graphic_paint_painter_tool_icon"
-URL_ICON_COLLAB  <- "https://www.pngkey.com/detail/u2w7i1i1r5t4t4u2_collaboration-icon-icon/"
+URL_ICON_CONTENT <-
+  "https://www.iconfinder.com/icons/465052/compose_content_document_pencil_script_sheet_write_icon"
+URL_ICON_FORMAT  <-
+  "https://www.iconfinder.com/icons/887655/brush_content_format_graphic_paint_painter_tool_icon"
+URL_ICON_COLLAB  <-
+  "https://www.pngkey.com/detail/u2w7i1i1r5t4t4u2_collaboration-icon-icon/"
 URL_LOGO_MD      <- "" ## TODO: Complete
 URL_LOGO_RMD     <- "" ## TODO: Complete
+URL_LOGO_R       <- "https://www.r-project.org/logo/"
 URL_DOWN_ARROW   <- "https://media.giphy.com/media/9PekRRQ0WlrRVwynAk/giphy.gif"
 
 EXAMPLE_HTML   <- "<center style='color:blue'>Estoy centrado y en azul</center>"
@@ -64,6 +89,8 @@ EXAMPLE_LaTeX  <- "$Y = \\beta_1 X + \\epsilon$"
 EXAMPLE_WORD   <- "www/sample_wordfile.txt"
 EXAMPLE_MD     <- "https://daringfireball.net/projects/markdown/syntax"
 EXAMPLE_EDITOR <- "https://stackedit.io/app#"
+EXAMPLE_YAML   <-
+  "https://bookdown.org/yihui/rmarkdown/pdf-document.html#table-of-contents-1"
 ```
 
 #
@@ -357,7 +384,7 @@ Aunque permite insertar:
 Aunque permite insertar:
 
 
-- LaTeX:
+- $\LaTeX$:
 
 <br>
 
@@ -483,7 +510,6 @@ img(src = IMG_EXTENDED_SYNTAX, height = 600)
 ```
 
 [MD extensions]: `r URL_EXTENSIONS_MD`
--->
 
 
 # Rmarkdown
@@ -497,65 +523,210 @@ img(src = LOGO_RMARKDOWN,  height="220")
 ```
 
 
-# Rmarkdown
+# ¿Qué es Rmarkdown? {data-transition="slide-in fade-out"}
 
-Extensión de markdown,  
-<p class="fragment">consiste en:</p>
+**Extensión** de markdown
 
-- encabezado
+<p class="fragment">Consiste en:</p>
 
-- markdown
+<center>
+<div class="container" style="width:60%">
 
-- Código R
+<div class="col fragment">
+```{r}
+img(src = LOGO_MARKDOWN, height = 80)
+```
+</div>
 
-	- Cálculos
-	- Gráficos
-	- Tablas
+<p class="col fragment">\+</p>
 
+<div class="col fragment">
+```{r}
+img(src = LOGO_R, height = 80)
+```
+</div>
+
+</div>
+</center>
+
+TODO: Ejemplos?
+<div class="container">
+
+<div class="col fragment">Cálculos</div>
+	
+<div class="col fragment">Gráficos</div>
+	
+<div class="col fragment">Tablas</div>
+
+</div>
+
+
+# ¿Qué es Rmarkdown? {data-transition="fade-in slide-out"}
+
+**Extensión** de markdown
+
+Consiste en:
+
+Encabezado ([YAML](URL_YAML_WIKI)):
+
+```yaml
 ---
-
-### Formatos
-
-- HTML
-
-	- Página web
-	- Blog
-	- presentación
-
-		- revealjs
-		- (Esta presentación)
-
-	- dashboard
-
+title: "Habits"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
 ---
+```
+<br>
+<br>
+<br>
 
-- PPT
-- Libro (bookdown)
+<small>
+(Ejemplo de [R Markdown: The Definitive Guide](`r EXAMPLE_YAML`))
+</small>
 
-	- web
-	- PDF
-	- ePub
 
----
+# Formatos {data-transition="slide-in fade-out"}
+
+### **HTML**
+
+>- [Documento HTML](`r URL_HTML_DOCS`)
+
+<br>
+
+>- [Sitio web](`r URL_BLOGDOWN`)
+
+<br>
+
+>- [Presentación HTML][slides] (e.g., [esta misma](`r URL_SELF_REF`))
+
+
+[slides]: `r URL_REVEALJS`
+
+
+# Formatos {data-transition="fade"}
+
+```{r}
+## TODO: Include example from BF dimensions?
+```
+
+### **HTML**
+
+```{r out.width="100%", echo=TRUE}
+leaflet() %>% addTiles() %>%
+  addMarkers(lng   = -3.690926, lat   = 40.481403, popup = "CCOMS UAM")
+```
+
+
+# Formatos {data-transition="fade"}
+
+### **Otros**
+
+>- [PowerPoint](`r URL_POWERPOINT`)
+
+<br>
+
+<div class="fragment">
+
+- [Libro](`r URL_BOOKDOWN`):
+  
+  - [Web Book](`r URL_HTML_BOOK`)
+
+  - [PDF](`r URL_PDF_BOOK`)
+
+  - [ePub](`r URL_EBOOK`)
+
+</div>
+
+
+# Formatos {data-transition="fade-in slide-out"}
+
+### **Documentos**
+
+<br>
+
+>- [Word](`r URL_WORD_DOCS`)
+
+<br>
+<br>
+
+>- [PDF](`r URL_PDF_DOCS`)
+-->
+
+
+# Ejemplo {data-transition="slide-in fade-out"}
+
+- Documento (múltiples formatos)
+
+```{r}
+tags$iframe(
+  src    = FILE_PATH_RMD_EXAMPLE,
+  width  = "100%",
+  height = 580
+)
+```
+
+
+# Ejemplo {data-transition="fade"}
 
 - Artículo
 
-	- Ejemplo
+```{r}
+tags$iframe(
+  src    = FILE_PATH_ELSEVIER_EXAMPLE,
+  width  = "100%",
+  height = 580
+)
+```
 
-		- Crear bibliografía
-		- Usar plantilla
-		- Generar submission
-		- Copiar a plantilla nueva
-		- Generar submission
 
-	- Salida
+# Ejemplo {data-transition="fade-in slide-out"}
 
-		- LaTeX
-		- PDF
+- Reenviar un artículo
 
----
+```{r}
+tags$iframe(
+  src    = FILE_PATH_SAGE_EXAMPLE,
+  width  = "100%",
+  height = 580
+)
+```
 
-### Otros tipos de código
+
+# ¿Merece la pena aprender? {data-transition="slide-in fade-out"}
+
+<br>
+
+>- Markdown
+
+<br>
+
+>- Rstudio
+
+<br>
+
+>- R
+
+<br>
+
+>- Nociones de HTML y $\LaTeX$
+
+
+# ¿Merece la pena aprender? {data-transition="fide-in slide-out"}
+
+<br>
+
+<div style="text-align:left">
+
+>1. Ahorro de esfuerzos<br><br>  
+>1. Desarrollo profesional<br><br>  
+>1. Ciencia abierta: Reproducibilidad + Replicabilidad
+
+</div>
+
+
+# Una agradable sorpresa...
 
 - Stata
 - Ejemplo: Informe de variables "outcome"
@@ -573,6 +744,7 @@ Extensión de markdown,
 ### Productividad: Separa contenido y composición
 
 - Mejor productividad cuando te acostumbras a no WYSIWYG
+
 
 ---
 
