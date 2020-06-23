@@ -3,36 +3,38 @@ title:        "Niveles de ocupación laboral recodificado"
 author:       "Daniel Morillo"
 date:         "`r format(lubridate::today(), '%d de %B de %Y')`"
 institute:    CCOMS, Universidad Autónoma de Madrid
-bibliography: Ejemplo_rmarkdown.bib
-csl:          apa-old-doi-prefix.csl
+bibliography: Ejemplormarkdown.bib
+csl:          vancouver-superscript-brackets-only-year.csl
 output:
+  word_document:
+    toc:      yes
+    df_print: kable
+    keep_md:  yes
+  html_document:
+    df_print:  paged
+    toc:       yes
+    toc_float: yes
   pdf_document:
     toc:      yes
     df_print: kable
     keep_tex: true
     keep_md:  true
-  html_document:
-    df_print:  paged
-    toc:       yes
-    toc_float: yes
-  word_document:
-    toc:            yes
-    df_print:       kable
-    keep_md:        yes
 ---
 
 ```{r setup, echo=FALSE}
 library(pacman)
 p_load(knitr, haven, tidyverse)
 
-FILE_SURVEY_BASELINE <- "C:/Users/Mori/Universidad Autonoma de Madrid/marta.miret@uam.es - Bases de datos maestras Edad con Salud/Ola_1_Linea_base/All_COURAGE_VFINAL.sav"
+FILE_SURVEY_BASELINE <- "dat/ecs_base.dta"
+ROOT_DIR             <- "../.."
 
-opts_chunk$set(echo = FALSE, cache = TRUE, results = 'asis')
+opts_knit$set(root.dir = ROOT_DIR)
+opts_chunk$set(echo = FALSE, cache = FALSE, results = 'asis')
 ```
 
 
 ```{r, cache=TRUE}
-raw_baseline <- read_spss(FILE_SURVEY_BASELINE) %>% filter(
+raw_baseline <- read_dta(FILE_SURVEY_BASELINE) %>% filter(
   q0001_rc  == 724,        ## Spanish subsample
   number_id != "724002691" ## Subject that withdrew consent
 )
@@ -53,7 +55,6 @@ La variable se recodifica siguiendo el procedimiento habitual
 
 ```{r recode-occupation}
 raw_baseline <- raw_baseline %>% mutate(
-  # OCCUPATION:
   occupation_bs = Q1510_CATOCCFINAL %>% zap_labels() %>% {
     case_when(
       . %in% c(933L, 9111:9629)            ~ 0,
@@ -74,7 +75,8 @@ raw_baseline <- raw_baseline %>% mutate(
       "Directivo"
     )
   ),
-  `Ocupación` = occupation_bs %>% fct_explicit_na("(Perdidos)")
+  `Ocupación`       = occupation_bs %>% fct_explicit_na("(Perdidos)"),
+  Q1510_CATOCCFINAL = Q1510_CATOCCFINAL %>% as_factor()
 )
 ```
 
@@ -102,9 +104,8 @@ junto a su etiqueta correspondiente.
 raw_baseline                   %>%
   filter(is.na(occupation_bs)) %>%
   count(
-    Q1510_CATOCCFINAL,
-    Etiqueta = as_factor(Q1510_CATOCCFINAL),
-    name = "Perdidos"
+    Categoría = Q1510_CATOCCFINAL %>% zap_labels(),
+    name      = "Perdidos"
   )                            %>%
   arrange(Perdidos %>% desc())
 ```
