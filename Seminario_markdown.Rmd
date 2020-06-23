@@ -38,6 +38,8 @@ FILE_PATH_ELSEVIER_EXAMPLE <-
   "www/ejemplo_Rmarkdown/Elsevier_submission/Elsevier_submission.Rmd"
 FILE_PATH_SAGE_EXAMPLE     <-
   "www/ejemplo_Rmarkdown/Sage_submission/Sage_submission.Rmd"
+FILE_PATH_STATA_EXAMPLE    <- "www/ejemplo_con_Stata/sorpresa_agradable.Rmd"
+FILE_PATH_WORKFLOW_EXAMPLE <- "www/ejemplo_workflow/generacion_variables.Rmd"
 
 LOGO_MARKDOWN  <- "www/md_logo.png"
 LOGO_RMARKDOWN <- "www/rmarkdown_logo.png"
@@ -53,6 +55,7 @@ IMG_EXTENDED_SYNTAX <- "www/extended_cheatsheet.png"
 URL_DINGUS        <- "http://spec.commonmark.org/dingus/"
 URL_PANDOC        <- "http://pandoc.org/"
 URL_BASICS_MD     <- "https://daringfireball.net/projects/markdown/basics"
+URL_MARKDOWN      <- "https://daringfireball.net/projects/markdown/"
 URL_EXTENSIONS_MD <-
   "https://www.markdownguide.org/cheat-sheet/#extended-syntax"
 URL_YAML_WIKI     <- "https://en.wikipedia.org/wiki/YAML"
@@ -72,6 +75,11 @@ URL_BOOKDOWN      <- "https://bookdown.org/yihui/bookdown/"
 URL_HTML_BOOK     <- "https://bookdown.org/yihui/bookdown/html.html"
 URL_PDF_BOOK      <- "https://bookdown.org/yihui/bookdown/latexpdf.html"
 URL_EBOOK         <- "https://bookdown.org/yihui/bookdown/e-books.html"
+URL_RMD_COURSE    <- "https://rmarkdown.rstudio.com/lesson-1.html"
+URL_RMD_CHEATSHT  <-
+  "https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf"
+URL_REF_GUIDE     <-
+  "https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf"
 
 URL_ICON_CONTENT <-
   "https://www.iconfinder.com/icons/465052/compose_content_document_pencil_script_sheet_write_icon"
@@ -80,7 +88,7 @@ URL_ICON_FORMAT  <-
 URL_ICON_COLLAB  <-
   "https://www.pngkey.com/detail/u2w7i1i1r5t4t4u2_collaboration-icon-icon/"
 URL_LOGO_MD      <- "" ## TODO: Complete
-URL_LOGO_RMD     <- "" ## TODO: Complete
+URL_LOGO_RMD     <- "https://rstudio.com/"
 URL_LOGO_R       <- "https://www.r-project.org/logo/"
 URL_DOWN_ARROW   <- "https://media.giphy.com/media/9PekRRQ0WlrRVwynAk/giphy.gif"
 
@@ -652,7 +660,6 @@ leaflet() %>% addTiles() %>%
 <br>
 
 >- [PDF](`r URL_PDF_DOCS`)
--->
 
 
 # Ejemplo {data-transition="slide-in fade-out"}
@@ -728,36 +735,94 @@ tags$iframe(
 
 # Una agradable sorpresa...
 
-- Stata
-- Ejemplo: Informe de variables "outcome"
+<br>
 
----
-
-## Conclusión
-
-### Legible
-
-### Fácil de editar
-
-### Fácil de mantener (control de versiones)
-
-### Productividad: Separa contenido y composición
-
-- Mejor productividad cuando te acostumbras a no WYSIWYG
+```{r}
+tags$iframe(
+  src    = FILE_PATH_STATA_EXAMPLE,
+  width  = "100%",
+  height = 580
+)
+```
 
 
----
+# Flujo de trabajo
 
-## Continuación
+- Automatización con Rmarkdown:
 
-### Tutorial
+```{r}
+tags$iframe(
+  src    = FILE_PATH_WORKFLOW_EXAMPLE,
+  width  = "100%",
+  height = 580
+)
+```
+-->
 
-### Chuleta
 
----
+# Conclusión {data-transition="slide-in fade-out"}
 
-### Retos
+Markdown es...
 
-- Replicar manual de instalación de OneDrive
+<br>
 
-	- Usar enlaces internos
+>- legible<br><br>  
+
+>- productivo<br><br>  
+
+>- fácil de editar<br><br>  
+
+>- fácil de mantener
+
+
+# Conclusión {data-transition="fade-in slide-out"}
+
+Rmarkdown...
+
+<br>
+
+>- es versátil<br><br><br>  
+
+>- evita trabajo repetitivo<br><br><br>  
+
+>- facilita la _**reproducibilidad**_
+
+
+# Saber más
+
+<br>
+
+- [Página de markdown](`r URL_MARKDOWN`)<br><br>  
+
+- [Extensiones de markdown](`r URL_EXTENSIONS_MD`)<br><br>  
+
+- [Curso de Rmarkdown en Rstudio](`r URL_RMD_COURSE`)<br><br>  
+
+- [Chuleta de Rmarkdown](`r URL_RMD_CHEATSHT`)<br><br>  
+
+- [Guía de referencia de Rmarkdown](`r URL_REF_GUIDE`)<br><br>  
+
+
+# "Retos"
+
+## Nivel 1: Instalar entorno
+
+- [R](`r `)
+
+- [Rstudio](`r `)
+
+- [Pandoc](`r `)
+
+- [TinyTeX](`r `)
+
+
+# "Retos"
+
+## Nivel 2: HTML desde plantilla
+
+
+# "Retos"
+
+## Nivel 3: Replicar guía de instalación de OneDrive
+
+

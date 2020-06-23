@@ -3,25 +3,23 @@ title: "Una agradable sorpresa"
 author: "Daniel Morillo"
 date: "`r format(lubridate::today(), '%d de %B de %Y')`"
 institute:    CCOMS, Universidad Autónoma de Madrid
-bibliography: ../ejemplo_Rmarkdown/Ejemplo_rmarkdown.bib
-csl:          apa-old-doi-prefix.csl
+bibliography: ../ejemplo_Rmarkdown/Ejemplormarkdown.bib
+csl:          ../ejemplo_Rmarkdown/apa-old-doi-prefix.csl
 output:
   html_document:
-    toc:      yes
-    df_print: kable
-    keep_md:  yes
+    toc:       yes
+    toc_float: yes
+    keep_md:   yes
 ---
 
 ```{r setup, include=FALSE}
 library(pacman)
-p_load(Statamarkdown)
+p_load(Statamarkdown, knitr)
 
-knitr::opts_chunk$set(echo = FALSE, results = 'markup')
-```
+ROOT_DIR             <- "../.."
 
-
-```{stata}
-use "C:\Users\Mori\Universidad Autonoma de Madrid\marta.miret@uam.es - Bases de datos maestras Edad con Salud\Ola_2\20150916 Database COURAGE wave 1.dta"
+opts_knit$set(root.dir = ROOT_DIR)
+opts_chunk$set(echo = FALSE, results = 'markup')
 ```
 
 
@@ -38,32 +36,38 @@ que es necesario incluir el nivel ocupacional como covariable.
 La variable se recodifica siguiendo el procedimiento habitual
 [@repousi_depression_2018; @lara_cognitive_2017].
 
-```{stata recode-occupation}
+```{stata, results='hide'}
+use "C:/Users/Mori/OneDrive - Universidad Autonoma de Madrid/Workspace/Seminario Markdown/dat/ecs_base.dta"
+
 destring Q1510_CATOCCFINAL, generate(q1510_occupation)
 
 gen occupation_bs=.
-replace occupation_bs=0 if (q1510_occupation>=9111 & q1510_occupation<=9629) 
-replace occupation_bs=0 if q1510_occupation==933 
-replace occupation_bs=1 if q1510_occupation==832 
-replace occupation_bs=1 if q1510_occupation==83 
-replace occupation_bs=1 if q1510_occupation==723 
-replace occupation_bs=1 if (q1510_occupation>=8111 & q1510_occupation<=8350) 
-replace occupation_bs=1 if (q1510_occupation>=7111 & q1510_occupation<=7534) 
-replace occupation_bs=1 if (q1510_occupation>=6111 & q1510_occupation<=6320) 
-replace occupation_bs=1 if q1510_occupation==54 
-replace occupation_bs=1 if q1510_occupation==513 
-replace occupation_bs=1 if (q1510_occupation>=5112 & q1510_occupation<=5419)  
-replace occupation_bs=2 if (q1510_occupation>=4110 & q1510_occupation<=4419) 
-replace occupation_bs=2 if q1510_occupation==351 
-replace occupation_bs=2 if (q1510_occupation>=3112 & q1510_occupation<=3435)  
-replace occupation_bs=3 if q1510_occupation==241 
-replace occupation_bs=3 if q1510_occupation==23 
-replace occupation_bs=3 if (q1510_occupation>=2141 & q1510_occupation<=2659) 
-replace occupation_bs=4 if q1510_occupation==110 
-replace occupation_bs=4 if (q1510_occupation>=1120 & q1510_occupation<=1420) 
+replace occupation_bs=0 if (q1510_occupation>=9111 & q1510_occupation<=9629)
+replace occupation_bs=0 if q1510_occupation==933
+replace occupation_bs=1 if q1510_occupation==832
+replace occupation_bs=1 if q1510_occupation==83
+replace occupation_bs=1 if q1510_occupation==723
+replace occupation_bs=1 if (q1510_occupation>=8111 & q1510_occupation<=8350)
+replace occupation_bs=1 if (q1510_occupation>=7111 & q1510_occupation<=7534)
+replace occupation_bs=1 if (q1510_occupation>=6111 & q1510_occupation<=6320)
+replace occupation_bs=1 if q1510_occupation==54
+replace occupation_bs=1 if q1510_occupation==513
+replace occupation_bs=1 if (q1510_occupation>=5112 & q1510_occupation<=5419)
+replace occupation_bs=2 if (q1510_occupation>=4110 & q1510_occupation<=4419)
+replace occupation_bs=2 if q1510_occupation==351
+replace occupation_bs=2 if (q1510_occupation>=3112 & q1510_occupation<=3435)
+replace occupation_bs=3 if q1510_occupation==241
+replace occupation_bs=3 if q1510_occupation==23
+replace occupation_bs=3 if (q1510_occupation>=2141 & q1510_occupation<=2659)
+replace occupation_bs=4 if q1510_occupation==110
+replace occupation_bs=4 if (q1510_occupation>=1120 & q1510_occupation<=1420)
 label variable occupation_bs "occupation at baseline"
 label define dOccupation 0 "No cualificado" 1 "Cualificado manual" 2 "Cualificado no manual" 3 "Profesional" 4 "Directivo"
 label values occupation_bs dOccupation
+
+tabulate occupation_bs, generate(occ)
+graph bar occ1 occ2 occ3 occ4 occ5
+graph export "C:/Users/Mori/OneDrive - Universidad Autonoma de Madrid/Workspace/Seminario Markdown/www/ejemplo_con_Stata/barchart.svg", replace
 ```
 
 
@@ -71,14 +75,44 @@ label values occupation_bs dOccupation
 
 La Figura 1 muestra la frecuencia absoluta de casos de cada nivel ocupacional.
 
-```{r occupation-level-barchart}
-```
+![Frecuencias nivel ocupacional](barchart.svg)
+
 
 La Tabla 1 muestra el número de valores perdidos por código de ocupación,
 junto a su etiqueta correspondiente.
 
 
-```{r missing-codes}
+```{stata, cleanlog=TRUE}
+use "C:/Users/Mori/OneDrive - Universidad Autonoma de Madrid/Workspace/Seminario Markdown/dat/ecs_base.dta"
+
+destring Q1510_CATOCCFINAL, generate(q1510_occupation)
+
+gen occupation_bs=.
+replace occupation_bs=0 if (q1510_occupation>=9111 & q1510_occupation<=9629)
+replace occupation_bs=0 if q1510_occupation==933
+replace occupation_bs=1 if q1510_occupation==832
+replace occupation_bs=1 if q1510_occupation==83
+replace occupation_bs=1 if q1510_occupation==723
+replace occupation_bs=1 if (q1510_occupation>=8111 & q1510_occupation<=8350)
+replace occupation_bs=1 if (q1510_occupation>=7111 & q1510_occupation<=7534)
+replace occupation_bs=1 if (q1510_occupation>=6111 & q1510_occupation<=6320)
+replace occupation_bs=1 if q1510_occupation==54
+replace occupation_bs=1 if q1510_occupation==513
+replace occupation_bs=1 if (q1510_occupation>=5112 & q1510_occupation<=5419)
+replace occupation_bs=2 if (q1510_occupation>=4110 & q1510_occupation<=4419)
+replace occupation_bs=2 if q1510_occupation==351
+replace occupation_bs=2 if (q1510_occupation>=3112 & q1510_occupation<=3435)
+replace occupation_bs=3 if q1510_occupation==241
+replace occupation_bs=3 if q1510_occupation==23
+replace occupation_bs=3 if (q1510_occupation>=2141 & q1510_occupation<=2659)
+replace occupation_bs=4 if q1510_occupation==110
+replace occupation_bs=4 if (q1510_occupation>=1120 & q1510_occupation<=1420)
+label variable occupation_bs "occupation at baseline"
+label define dOccupation 0 "No cualificado" 1 "Cualificado manual" 2 "Cualificado no manual" 3 "Profesional" 4 "Directivo"
+label values occupation_bs dOccupation
+
+keep if occupation_bs!=.
+tabulate q1510_occupation, sort
 ```
 
 
