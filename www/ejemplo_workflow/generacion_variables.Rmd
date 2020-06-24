@@ -1,0 +1,195 @@
+---
+title: "Description of the well-being variables of COURAGE section 7000"
+date: "`r format(lubridate::today(), '%d de %B de %Y')`"
+institute:    CCOMS, Universidad Autónoma de Madrid
+bibliography: ../ejemplo_Rmarkdown/Ejemplormarkdown.bib
+csl:          ../ejemplo_Rmarkdown/apa-old-doi-prefix.csl
+output:
+  html_document:
+    toc:             yes
+    toc_float:       yes
+    keep_md:         yes
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+library(pacman)
+p_load(Statamarkdown, knitr)
+
+opts_chunk$set(echo = TRUE, results = 'markup')
+```
+
+
+# Variable information
+
+| Variable name  |Label                |Format  | Code                       |
+|:--------------:|:-------------------:|:------:|:---------------------------|
+| positiveaffect |positive affect (drm)|Numeric |Score in positive affect obtained from the Day Reconstruction Method |
+| negativeaffect |negative affect (drm)|Numeric |Score in negative affect obtained from the Day Reconstruction Method |
+| netaffect      |net affect (drm)     |Numeric |Score in net affect obtained from the Day Reconstruction Method      |
+| U_index 	     |U-index (drm)        |Numeric |U-index (proportion of time in which the highest-rated feeling was a negative one) obtained from the Day Reconstruction Method |
+
+
+# Variable description
+
+Respondents were asked to complete an abbreviated version
+of the Day Reconstruction Method.
+Net affect [@kahneman_developments_2006] was defined as
+the average of the two positive emotions (calm/relaxed and enjoying)
+minus the average of the five negative ones
+(worried, rushed, irritated/angry, depressed, and tense/stressed),
+i.e., positive affect minus negative affect.
+Individual net affect was calculated adding up the net-affect in each activity
+performed weighted by its duration. Net affect scores ranged from -6 to 6,
+with higher scores representing best affective state.
+The U-index [@kahneman_developments_2006] was defined as the proportion of time,
+aggregated over respondents,
+in which the highest-rated feeling was a negative one.
+
+
+# Explanation on how the variable was created
+
+Four measures were obtained from the Day Reconstruction Method (DRM):
+positive affect, negative affect, net affect, and U-index.
+
+- **Positive affect**: the average of the two positive emotions
+(calm/relaxed and enjoying).
+
+- **Negative affect**: the average of the five negative ones
+(worried, rushed, irritated/angry, depressed, and tense/stressed).
+
+- **Net affect**: the average of the two positive emotions
+(calm/relaxed and enjoying) minus the average of the five negative ones
+(worried, rushed, irritated/angry, depressed, and tense/stressed),
+i.e., positive affect minus negative affect [@kahneman_developments_2006].
+Individual net affect was calculated adding up the net-affect
+in each activity performed weighted by its duration.
+Net affect scores ranged from -6 to 6,
+with higher scores representing a better affective state. 
+
+- **U-index**: the proportion of time, aggregated over respondents,
+in which the highest-rated feeling was a negative one
+[@kahneman_developments_2006].
+
+
+#	Syntax used to create the variable (sas)
+
+```{stata, eval=FALSE}
+rename q7016a_hour q7016h
+rename q7016a_min q7016m
+rename q7051a_hour q7051h
+rename q7051a_min q7051m
+rename q7101a_hour q7101h
+rename q7101a_min q7101m
+rename q7151a_hour q7151h
+rename q7151a_min q7151m
+rename q7201a_hour q7201h
+rename q7201a_min q7201m
+rename q7251a_hour q7251h
+rename q7251a_min q7251m
+rename q7301a_hour q7301h
+rename q7301a_min q7301m
+rename q7351a_hour q7351h
+rename q7351a_min q7351m
+rename q7401a_hour q7401h
+rename q7401a_min q7401m
+rename q7451a_hour q7451h
+rename q7451a_min q7451m
+generate duractivity1 = 60*q7016h + q7016m 
+generate duractivity2 = 60*q7051h + q7051m 
+generate duractivity3 = 60*q7101h + q7101m 
+generate duractivity4 = 60*q7151h + q7151m 
+generate duractivity5 = 60*q7201h + q7201m 
+generate duractivity6 = 60*q7251h + q7251m 
+generate duractivity7 = 60*q7301h + q7301m 
+generate duractivity8 = 60*q7351h + q7351m 
+generate duractivity9 = 60*q7401h + q7401m 
+generate duractivity10 = 60*q7451h + q7451m
+egen totaldur=rowtotal(duractivity1 duractivity2 duractivity3 duractivity4 duractivity5 duractivity6 duractivity7 duractivity8 duractivity9 duractivity10) 
+egen neg_activity1 = rowmean (q7019-q7023)
+egen neg_activity2 = rowmean (q7053-q7057)
+egen neg_activity3 = rowmean (q7103-q7107)
+egen neg_activity4 = rowmean (q7153-q7157)
+egen neg_activity5 = rowmean (q7203-q7207)
+egen neg_activity6 = rowmean (q7253-q7257)
+egen neg_activity7 = rowmean (q7303-q7307)
+egen neg_activity8 = rowmean (q7353-q7357)
+egen neg_activity9 = rowmean (q7403-q7407)
+egen neg_activity10 = rowmean (q7453-q7457)
+egen pos_activity1 = rowmean (q7024 q7025)
+egen pos_activity2 = rowmean (q7058 q7059)
+egen pos_activity3 = rowmean (q7108 q7109)
+egen pos_activity4 = rowmean (q7158 q7159)
+egen pos_activity5 = rowmean (q7208 q7209)
+egen pos_activity6 = rowmean (q7258 q7259)
+egen pos_activity7 = rowmean (q7308 q7309)
+egen pos_activity8 = rowmean (q7358 q7359)
+egen pos_activity9 = rowmean (q7408 q7409)
+egen pos_activity10 = rowmean (q7458 q7459)
+generate pond_pos1=duractivity1*pos_activity1 
+generate pond_pos2=duractivity2*pos_activity2 
+generate pond_pos3=duractivity3*pos_activity3 
+generate pond_pos4=duractivity4*pos_activity4 
+generate pond_pos5=duractivity5*pos_activity5 
+generate pond_pos6=duractivity6*pos_activity6 
+generate pond_pos7=duractivity7*pos_activity7 
+generate pond_pos8=duractivity8*pos_activity8 
+generate pond_pos9=duractivity9*pos_activity9 
+generate pond_pos10=duractivity10*pos_activity10
+generate pond_neg1=duractivity1*neg_activity1 
+generate pond_neg2=duractivity2*neg_activity2 
+generate pond_neg3=duractivity3*neg_activity3 
+generate pond_neg4=duractivity4*neg_activity4 
+generate pond_neg5=duractivity5*neg_activity5 
+generate pond_neg6=duractivity6*neg_activity6 
+generate pond_neg7=duractivity7*neg_activity7 
+generate pond_neg8=duractivity8*neg_activity8 
+generate pond_neg9=duractivity9*neg_activity9 
+generate pond_neg10=duractivity10*neg_activity10
+egen pond_pos=rowtotal(pond_pos1-pond_pos10)
+egen pond_neg=rowtotal(pond_neg1-pond_neg10)
+generate positiveaffect=pond_pos/totaldur
+generate negativeaffect=pond_neg/totaldur
+generate netaffect=positiveaffect-negativeaffect
+generate durneg1=duractivity1 if max(q7019,q7020,q7021,q7022,q7023)>=max(q7024,q7025)
+replace durneg1=0 if max(q7019,q7020,q7021,q7022,q7023)<max(q7024,q7025)
+generate durneg2=duractivity2 if max(q7053,q7054,q7055,q7056,q7057)>=max(q7058,q7059)
+replace durneg2=0 if max(q7053,q7054,q7055,q7056,q7057)<max(q7058,q7059)
+generate durneg3=duractivity3 if max(q7103,q7104,q7105,q7106,q7107)>=max(q7108,q7109)
+replace durneg3=0 if max(q7103,q7104,q7105,q7106,q7107)<max(q7108,q7109)
+generate durneg4=duractivity4 if max(q7153,q7154,q7155,q7156,q7157)>=max(q7158,q7159)
+replace durneg4=0 if max(q7153,q7154,q7155,q7156,q7157)<max(q7158,q7159)
+generate durneg5=duractivity5 if max(q7203,q7204,q7205,q7206,q7207)>=max(q7208,q7209)
+replace durneg5=0 if max(q7203,q7204,q7205,q7206,q7207)<max(q7208,q7209)
+generate durneg6=duractivity6 if max(q7253,q7254,q7255,q7256,q7257)>=max(q7258,q7259)
+replace durneg6=0 if max(q7253,q7254,q7255,q7256,q7257)<max(q7258,q7259)
+generate durneg7=duractivity7 if max(q7303,q7304,q7305,q7306,q7307)>=max(q7308,q7309)
+replace durneg7=0 if max(q7303,q7304,q7305,q7306,q7307)<max(q7308,q7309)
+generate durneg8=duractivity8 if max(q7353,q7354,q7355,q7356,q7357)>=max(q7358,q7359)
+replace durneg8=0 if max(q7353,q7354,q7355,q7356,q7357)<max(q7358,q7359)
+generate durneg9=duractivity9 if max(q7403,q7404,q7405,q7406,q7407)>=max(q7408,q7409)
+replace durneg9=0 if max(q7403,q7404,q7405,q7406,q7407)<max(q7408,q7409)
+generate durneg10=duractivity10 if max(q7453,q7454,q7455,q7456,q7457)>=max(q7458,q7459)
+replace durneg10=0 if max(q7453,q7454,q7455,q7456,q7457)<max(q7458,q7459)
+egen durneg=rowtotal(durneg1-durneg10)
+generate U_index=durneg/totaldur
+```
+
+
+# For any further questions regarding these variables please contact:
+
+**Name**: Félix Caballero  
+**e-mail**: [felix.caballero@uam.es](mailto:felix.caballero@uam.es)  
+**Phone number**: (+34) 91 497 24 47
+
+
+or
+
+
+**Name**: Marta Miret  
+**email**: [marta.miret@uam.es](mailto:marta.miret@uam.es)  
+**Phone number**: (+34) 91 497 27 16
+
+
+
+# References

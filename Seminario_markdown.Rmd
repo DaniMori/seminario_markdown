@@ -1,31 +1,32 @@
 ---
 title:
-author: "Daniel Morillo"
+author:    "Daniel Morillo"
 institute: "Universidad Autónoma de Madrid"
-date: "`r format(lubridate::today(), '%d de %B de %Y')`"
+date:      "`r format(lubridate::today(), '%d de %B de %Y')`"
 output:
   revealjs::revealjs_presentation:
-    transition: slide
+    transition:      slide
     transitionSpeed: slow
-    theme: serif
-    smart: true
-    center: false
-    incremental: false
-    slide_level: 1
-    fig_width: 7
-    fig_height: 4.5
-    fig_caption: false
-    self_contained: true
+    theme:           league
+    highlight:       espresso
+    smart:           yes
+    center:          no
+    incremental:     no
+    slide_level:     1
+    fig_width:       5.5
+    fig_height:      3.2
+    fig_caption:     no
+    self_contained:  yes
     reveal_options:
-      slideNumber: true
-      previewLinks: true
-      pdfSeparateFragments: false
+      slideNumber:          yes
+      previewLinks:         yes
+      pdfSeparateFragments: no
 ---
 
 ```{r setup, include=FALSE}
 # Libraries:
 library(pacman)
-p_load(knitr, tidyverse, lubridate, htmltools, leaflet)
+p_load(knitr, tidyverse, lubridate, htmltools, leaflet, haven)
 
 # Configuration:
 opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, results = 'asis')
@@ -34,71 +35,81 @@ opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, results = 'asis')
 
 FILE_PATH_INTERVIEW        <- "www/Protocolo_entrevista_experiencias.html"
 FILE_PATH_RMD_EXAMPLE      <- "www/ejemplo_Rmarkdown/Recoding_occupation.Rmd"
-FILE_PATH_ELSEVIER_EXAMPLE <-
-  "www/ejemplo_Rmarkdown/Elsevier_submission/Elsevier_submission.Rmd"
-FILE_PATH_SAGE_EXAMPLE     <-
-  "www/ejemplo_Rmarkdown/Sage_submission/Sage_submission.Rmd"
+FILE_PATH_ELSEVIER_EXAMPLE <- "www/ejemplo_Rmarkdown/Elsevier_submission/Elsevier_submission.Rmd"
+FILE_PATH_SAGE_EXAMPLE     <- "www/ejemplo_Rmarkdown/Sage_submission/Sage_submission.Rmd"
 FILE_PATH_STATA_EXAMPLE    <- "www/ejemplo_con_Stata/sorpresa_agradable.Rmd"
 FILE_PATH_WORKFLOW_EXAMPLE <- "www/ejemplo_workflow/generacion_variables.Rmd"
 
-LOGO_MARKDOWN  <- "www/md_logo.png"
-LOGO_RMARKDOWN <- "www/rmarkdown_logo.png"
-LOGO_R         <- "www/R_logo.png"
+LOGO_MARKDOWN  <- "www/assets/markdown-mark-white.svg"
+LOGO_RMARKDOWN <- "www/assets/rmarkdown_logo.png"
+LOGO_R         <- "www/assets/R_logo.png"
 
-ICON_CONTENT   <- "www/content.png"
-ICON_FORMAT    <- "www/format.png"
-ICON_DOWNARROW <- "www/down_arrow.gif"
-ICON_COLLAB    <- "www/doc_collaborate.png"
+ICON_CONTENT   <- "www/assets/content.png"
+ICON_FORMAT    <- "www/assets/format.png"
+ICON_DOWNARROW <- "www/assets/down_arrow.gif"
+ICON_COLLAB    <- "www/assets/doc_collaborate.png"
 
-IMG_EXTENDED_SYNTAX <- "www/extended_cheatsheet.png"
+IMG_EXTENDED_SYNTAX <- "www/assets/extended_cheatsheet.png"
 
 URL_DINGUS        <- "http://spec.commonmark.org/dingus/"
 URL_PANDOC        <- "http://pandoc.org/"
 URL_BASICS_MD     <- "https://daringfireball.net/projects/markdown/basics"
 URL_MARKDOWN      <- "https://daringfireball.net/projects/markdown/"
-URL_EXTENSIONS_MD <-
-  "https://www.markdownguide.org/cheat-sheet/#extended-syntax"
+URL_EXTENSIONS_MD <- "https://www.markdownguide.org/cheat-sheet/#extended-syntax"
 URL_YAML_WIKI     <- "https://en.wikipedia.org/wiki/YAML"
 URL_FLEXDASHBOARD <- "https://rmarkdown.rstudio.com/flexdashboard/"
 URL_BLOGDOWN      <- "https://bookdown.org/yihui/blogdown/"
-URL_POWERPOINT    <-
-  "https://bookdown.org/yihui/rmarkdown/powerpoint-presentation.html"
+URL_POWERPOINT    <- "https://bookdown.org/yihui/rmarkdown/powerpoint-presentation.html"
 URL_REVEALJS      <- "https://bookdown.org/yihui/rmarkdown/revealjs.html"
 URL_WORD_DOCS     <- "https://bookdown.org/yihui/rmarkdown/word-document.html"
 URL_PDF_DOCS      <- "https://bookdown.org/yihui/rmarkdown/pdf-document.html"
 URL_HTML_DOCS     <- "https://bookdown.org/yihui/rmarkdown/pdf-document.html"
 URL_FORMATS       <- "https://rmarkdown.rstudio.com/formats.html"
 URL_RMARKDOWN_GD  <- "https://bookdown.org/yihui/rmarkdown/"
-URL_SELF_REF      <-
-  "https://github.com/DaniMori/seminario_markdown/blob/master/Seminario_markdown.Rmd"
+URL_SELF_REF      <- "https://github.com/DaniMori/seminario_markdown/blob/master/Seminario_markdown.Rmd"
 URL_BOOKDOWN      <- "https://bookdown.org/yihui/bookdown/"
 URL_HTML_BOOK     <- "https://bookdown.org/yihui/bookdown/html.html"
 URL_PDF_BOOK      <- "https://bookdown.org/yihui/bookdown/latexpdf.html"
 URL_EBOOK         <- "https://bookdown.org/yihui/bookdown/e-books.html"
 URL_RMD_COURSE    <- "https://rmarkdown.rstudio.com/lesson-1.html"
-URL_RMD_CHEATSHT  <-
-  "https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf"
-URL_REF_GUIDE     <-
-  "https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf"
+URL_RMD_CHEATSHT  <- "https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf"
+URL_REF_GUIDE     <- "https://rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf"
+URL_MD_TUTORIAL   <- "https://www.markdowntutorial.com/"
+URL_CRAN          <- "https://cran.r-project.org/"
+URL_RSTUDIO_DL    <- "https://rstudio.com/products/rstudio/download/"
+URL_RMD_4SC       <- "https://rmd4sci.njtierney.com/"
+URL_RMD_4MED      <- "https://rmd4medicine.netlify.app/"
+URL_RSTUDIO_EDUC  <- "https://education.rstudio.com/"
+URL_ADV_WORKSHOP  <- "https://arm.rbind.io/"
+URL_COMMUNICATE   <- "https://ysc-rmarkdown.netlify.app/"
+URL_RMD_TEMPLATE  <- "https://rmarkdown.rstudio.com/articles_integration.html#file-templates"
+URL_TINYTEX       <- "https://yihui.org/tinytex/"
+URL_REVEALJS_PKG  <- "https://cran.r-project.org/web/packages/revealjs/index.html"
+URL_INTERVIEW     <- "https://github.com/DaniMori/seminario_markdown/blob/master/www/Protocolo_entrevista_experiencias.Rmd"
+URL_STUDIO_PROJ   <- "https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects"
+URL_ONEDRIVE_DOC  <- "https://dauam-my.sharepoint.com/:b:/r/personal/marta_miret_uam_es/Documents/Edad%20con%20Salud/Documentacion%20Edad%20con%20Salud/Otros/Migracio%CC%81n%20a%20OneDrive/Manual_sincronizacio%CC%81n_OneDrive.pdf?csf=1&web=1&e=pVPN1a"
+URL_IMAGES_GITHUB <- "https://github.com/DaniMori/seminario_markdown/tree/master/www/oneDrive_img"
+URL_R4DS          <- "https://r4ds.had.co.nz/"
 
-URL_ICON_CONTENT <-
-  "https://www.iconfinder.com/icons/465052/compose_content_document_pencil_script_sheet_write_icon"
-URL_ICON_FORMAT  <-
-  "https://www.iconfinder.com/icons/887655/brush_content_format_graphic_paint_painter_tool_icon"
-URL_ICON_COLLAB  <-
-  "https://www.pngkey.com/detail/u2w7i1i1r5t4t4u2_collaboration-icon-icon/"
-URL_LOGO_MD      <- "" ## TODO: Complete
+URL_ICON_CONTENT <- "https://www.iconfinder.com/icons/465052/compose_content_document_pencil_script_sheet_write_icon"
+URL_ICON_FORMAT  <- "https://www.iconfinder.com/icons/887655/brush_content_format_graphic_paint_painter_tool_icon"
+URL_ICON_COLLAB  <- "https://www.pngkey.com/detail/u2w7i1i1r5t4t4u2_collaboration-icon-icon/"
+URL_LOGO_MD      <- "https://www.markdownguide.org/"
 URL_LOGO_RMD     <- "https://rstudio.com/"
 URL_LOGO_R       <- "https://www.r-project.org/logo/"
 URL_DOWN_ARROW   <- "https://media.giphy.com/media/9PekRRQ0WlrRVwynAk/giphy.gif"
 
-EXAMPLE_HTML   <- "<center style='color:blue'>Estoy centrado y en azul</center>"
+EXAMPLE_HTML   <- "<center style='color:lightblue'>Estoy centrado y en azul</center>"
 EXAMPLE_LaTeX  <- "$Y = \\beta_1 X + \\epsilon$"
 EXAMPLE_WORD   <- "www/sample_wordfile.txt"
 EXAMPLE_MD     <- "https://daringfireball.net/projects/markdown/syntax"
 EXAMPLE_EDITOR <- "https://stackedit.io/app#"
-EXAMPLE_YAML   <-
-  "https://bookdown.org/yihui/rmarkdown/pdf-document.html#table-of-contents-1"
+EXAMPLE_YAML   <- "https://bookdown.org/yihui/rmarkdown/pdf-document.html#table-of-contents-1"
+
+IMG_HEIGHT_ATTR <- "43"
+PERCENT         <- "31.5"
+
+DATA_ECL_BASE <- "dat/ecs_base.dta"
 ```
 
 #
@@ -145,8 +156,6 @@ div(
 #### Universidad Autónoma de Madrid
 
 ##### `r today() %>% format('%d de %B de %Y')`
-
-<!--
 
 # Bienvenidos/as
 
@@ -210,7 +219,7 @@ Marcas de formato
 
 <small>
 Tiene "trampa":  
-Elementos incrementales, columnas
+Animaciones, columnas
 </small>
 
 </div>
@@ -221,13 +230,15 @@ Elementos incrementales, columnas
 **Markdown** _también_ es...
 
 <div class="fragment">
->- un [_conversor_ a HTML](`r URL_DINGUS`):
+- un [_conversor_ a HTML](`r URL_DINGUS`):  
+
+<br>
 
 ```{r}
 tags$iframe(
   src    = URL_DINGUS,
   width  = "100%",
-  height = 400
+  height = 360
 )
 ```
 </div>
@@ -268,14 +279,18 @@ div(
 )
 ```
 
+
 # ¿Por qué usar Markdown? {data-transition="slide-in fade-out"}
 
 Es *muy legible*:
 
+```{r}
+## TODO: width
+```
 
 <div class="container">
 
-<div class="col">
+<div class="col" style="width:30%">
 ```md
 # Título 1
 
@@ -298,9 +313,11 @@ Es *muy legible*:
 
 <div class="col">
 
-<h2>Título 1</h2>
+<small>
+<br>
+<h1>Título 1</h1>
 
-<h3>Título 2</h3>
+<h2>Título 2</h2>
 
 **negrita** y _cursiva_
 
@@ -313,6 +330,8 @@ Es *muy legible*:
 1. elementos
 
 1. numerados
+
+</small>
 
 </div>
 
@@ -346,14 +365,13 @@ Es *muy legible*:
 <div class="col">
 
 <small>
-
 <h2>Título 3</h2>
 
 <h3>Título 4</h3>
 
 [enlace](https://www.ccomsuam.org/)
 
-`r img(src = LOGO_MARKDOWN, height = 30)`
+`r img(src = LOGO_MARKDOWN, height = 100)`
 
 >Si buscas resultados distintos,
 >no hagas siempre lo mismo.
@@ -450,7 +468,7 @@ Es *interoperable*
 MS Word:
 
 ```{r}
-tags$iframe(src = EXAMPLE_WORD, width = "100%", height = 520)
+tags$iframe(src = EXAMPLE_WORD, width = "100%", height = 400)
 ```
 </div>
 
@@ -458,14 +476,14 @@ tags$iframe(src = EXAMPLE_WORD, width = "100%", height = 520)
 [Markdown](`r EXAMPLE_MD`):
 
 ```{r}
-tags$iframe(src = paste0(EXAMPLE_MD, ".text"), width = "120%", height = 450)
+tags$iframe(src = paste0(EXAMPLE_MD, ".text"), width = "120%", height = 400)
 ```
 </div>
 
 </div>
 
 
-# Pero...
+# Pero... {data-transition="slide-in fade-out"}
 
 - No es _WYSIWYG_:
 
@@ -483,7 +501,7 @@ tags$iframe(
 ```
 
 
-# Pero...
+# Pero... {data-transition="fade-in slide-out"}
 
 - Requiere herramientas específicas de colaboración
 
@@ -494,7 +512,7 @@ img(src = ICON_COLLAB, width = 400)
 ```
 
 
-# Aprender Markdown
+# Aprender Markdown {data-transition="slide-in fade-out"}
 
 Es [**extremadamente sencillo**][MD basics]:
 
@@ -502,19 +520,19 @@ Es [**extremadamente sencillo**][MD basics]:
 tags$iframe(
   src    = URL_BASICS_MD,
   width  = "100%",
-  height = 550
+  height = 400
 )
 ```
 
 [MD basics]: `r URL_BASICS_MD`
 
 
-# Aprender Markdown
+# Aprender Markdown {data-transition="fade-in slide-out"}
 
 También conviene conocer [*extensiones comunes*][MD extensions]:
 
 ```{r}
-img(src = IMG_EXTENDED_SYNTAX, height = 600)
+img(src = IMG_EXTENDED_SYNTAX, height = 480)
 ```
 
 [MD extensions]: `r URL_EXTENSIONS_MD`
@@ -537,36 +555,84 @@ img(src = LOGO_RMARKDOWN,  height="220")
 
 <p class="fragment">Consiste en:</p>
 
-<center>
-<div class="container" style="width:60%">
+<br>
 
-<div class="col fragment">
-```{r}
-img(src = LOGO_MARKDOWN, height = 80)
-```
-</div>
-
-<p class="col fragment">\+</p>
-
-<div class="col fragment">
-```{r}
-img(src = LOGO_R, height = 80)
-```
-</div>
-
-</div>
-</center>
-
-TODO: Ejemplos?
 <div class="container">
 
-<div class="col fragment">Cálculos</div>
-	
-<div class="col fragment">Gráficos</div>
-	
-<div class="col fragment">Tablas</div>
+<div class="col fragment" style="width:25%">
+```{r}
+img(src = LOGO_MARKDOWN, height = 160)
+```
+</div>
+
+<div class="col fragment" style="width:75%">
+```{r}
+img(src = LOGO_R, height = 160)
+```
+</div>
 
 </div>
+
+
+# ¿Qué es Rmarkdown? {data-transition="fade"}
+
+```{r}
+img(src = LOGO_R, height = 60)
+```
+
+##### Cálculos
+
+<br>
+
+<center>
+````{md eval=FALSE, echo=TRUE}
+
+    PERCENT <- n_control / n_total * 100
+
+El grupo control representó el `r PERCENT`% del total.
+````
+</center>
+
+<br>
+
+El grupo control representó el `r PERCENT`% del total.
+
+
+# ¿Qué es Rmarkdown? {data-transition="fade"}
+
+```{r}
+img(src = LOGO_R, height = 60)
+```
+
+```{r results='hide'}
+ecs_bl <- DATA_ECL_BASE %>% read_dta()
+
+theme_set(theme_minimal()) %+replace% 
+  theme(plot.background = element_rect(fill = "transparent", colour = NA))
+```
+
+##### Gráficos
+
+<center>
+```{r echo=TRUE}
+ecs_bl %>% ggplot(aes(x = q1011_age)) + geom_histogram(fill = "lightblue")
+```
+</center>
+
+
+# ¿Qué es Rmarkdown? {data-transition="fade"}
+
+```{r}
+img(src = LOGO_R, height = 60)
+```
+
+##### Tablas
+
+<center>
+```{r echo=TRUE, results='asis'}
+ecs_bl %>% as_factor() %>% count(q0001_rc, proxy) %>% kable()
+```
+</center>
 
 
 # ¿Qué es Rmarkdown? {data-transition="fade-in slide-out"}
@@ -575,7 +641,7 @@ TODO: Ejemplos?
 
 Consiste en:
 
-Encabezado ([YAML](URL_YAML_WIKI)):
+Encabezado ([YAML](`r URL_YAML_WIKI`)):
 
 ```yaml
 ---
@@ -614,10 +680,6 @@ output:
 
 
 # Formatos {data-transition="fade"}
-
-```{r}
-## TODO: Include example from BF dimensions?
-```
 
 ### **HTML**
 
@@ -670,7 +732,7 @@ leaflet() %>% addTiles() %>%
 tags$iframe(
   src    = FILE_PATH_RMD_EXAMPLE,
   width  = "100%",
-  height = 580
+  height = 400
 )
 ```
 
@@ -683,7 +745,7 @@ tags$iframe(
 tags$iframe(
   src    = FILE_PATH_ELSEVIER_EXAMPLE,
   width  = "100%",
-  height = 580
+  height = 400
 )
 ```
 
@@ -696,7 +758,7 @@ tags$iframe(
 tags$iframe(
   src    = FILE_PATH_SAGE_EXAMPLE,
   width  = "100%",
-  height = 580
+  height = 400
 )
 ```
 
@@ -741,7 +803,7 @@ tags$iframe(
 tags$iframe(
   src    = FILE_PATH_STATA_EXAMPLE,
   width  = "100%",
-  height = 580
+  height = 400
 )
 ```
 
@@ -754,10 +816,9 @@ tags$iframe(
 tags$iframe(
   src    = FILE_PATH_WORKFLOW_EXAMPLE,
   width  = "100%",
-  height = 580
+  height = 400
 )
 ```
--->
 
 
 # Conclusión {data-transition="slide-in fade-out"}
@@ -766,11 +827,11 @@ Markdown es...
 
 <br>
 
->- legible<br><br>  
+>- legible<br><br><br>  
 
->- productivo<br><br>  
+>- productivo<br><br><br>  
 
->- fácil de editar<br><br>  
+>- fácil de editar<br><br><br>  
 
 >- fácil de mantener
 
@@ -782,6 +843,8 @@ Rmarkdown...
 <br>
 
 >- es versátil<br><br><br>  
+
+>- es gratis!<br><br><br>  
 
 >- evita trabajo repetitivo<br><br><br>  
 
@@ -803,26 +866,161 @@ Rmarkdown...
 - [Guía de referencia de Rmarkdown](`r URL_REF_GUIDE`)<br><br>  
 
 
+# Saber (aún) más
+
+- [Rstudio Education](`r URL_RSTUDIO_EDUC`)<br><br>  
+
+- [R for Data Science](`r URL_R4DS`)<br><br>  
+
+- [RMarkdown for Scientists](`r URL_RMD_4SC`)<br><br> 
+
+- [RMarkdown for Medicine](`r URL_RMD_4MED`)<br><br>  
+
+- [Communicating with RMarkdown](`r URL_COMMUNICATE`)<br><br>  
+
+- [Advanced RMarkdown Workshop](`r URL_ADV_WORKSHOP`)<br><br>  
+
+
 # "Retos"
 
-## Nivel 1: Instalar entorno
+## Nivel 1: Tutorial markdown
 
-- [R](`r `)
+<br>
 
-- [Rstudio](`r `)
+- Ir a `r URL_MD_TUTORIAL`<br><br><br>  
 
-- [Pandoc](`r `)
+- Hacer click en *Ready? Let's get started!*<br><br><br>  
 
-- [TinyTeX](`r `)
+- Completar tutorial<br><br><br>  
 
 
 # "Retos"
 
-## Nivel 2: HTML desde plantilla
+## Nivel 1: Instalar entorno Rstudio
+
+- [R](`r URL_CRAN`) (elige Sistema Operativo)<br>  
+
+- [Rstudio Desktop Free](`r URL_RSTUDIO_DL`)<br>  
+
+- TinyTeX ([más información](`r URL_TINYTEX`)):
+
+```{r eval=FALSE, echo=TRUE}
+install.packages("tinytex")
+library(tinytex)
+install_tinytex()
+```
+
+- Crea un "documento PDF" a partir de una
+[plantilla de Rmarkdown](`r URL_RMD_TEMPLATE`)
 
 
 # "Retos"
 
 ## Nivel 3: Replicar guía de instalación de OneDrive
 
+- Instala [revealjs](`r URL_REVEALJS_PKG`) desde Rstudio:
 
+```{r eval=FALSE, echo=TRUE}
+install.packages("revealjs")
+```
+
+- Crea un [nuevo proyecto en Rstudio](`r URL_STUDIO_PROJ`)
+
+- Descarga [`Protocolo_entrevista_experiencias.Rmd`](`r URL_INTERVIEW`)  
+para usarlo como plantilla
+
+- Descarga [estas imágenes](`r URL_IMAGES_GITHUB`)
+
+- Usando la plantilla y las imágenes, replica en Rmarkdown la
+[`Guía de sincronización de OneDrive`](`r URL_ONEDRIVE_DOC`)
+
+
+# FIN
+
+<br>
+<br>
+<br>
+
+### Eso ha sido todo
+
+### ¡Muchas gracias!
+
+
+# Atribuciones
+
+<div class="container">
+<div class="col" style="width:20%">
+`r img(alt = "Logo Markdown", src = LOGO_MARKDOWN, height = IMG_HEIGHT_ATTR)`
+</div>
+<div class="col" style="width:80%">
+<small>
+[Markdownguide.org](`r URL_LOGO_MD`)
+</small>
+</div>
+</div>
+
+<div class="container">
+<div class="col" style="width:20%">
+`r img(alt = "Logo Rmarkdown", src = LOGO_RMARKDOWN, height = IMG_HEIGHT_ATTR)`
+</div>
+<div class="col" style="width:80%">
+<small>
+[Rstudio.com](`r URL_LOGO_RMD`)
+</small>
+</div>
+</div>
+
+<div class="container">
+<div class="col" style="width:20%">
+`r img(alt = "Logo R", src = LOGO_R, height = IMG_HEIGHT_ATTR)`
+</div>
+<div class="col" style="width:80%">
+<small>
+[R-project.org](`r URL_LOGO_R`)
+</small>
+</div>
+</div>
+
+<div class="container">
+<div class="col" style="width:20%">
+`r img(alt = "Icono 'contenido'", src = ICON_CONTENT, height = IMG_HEIGHT_ATTR)`
+</div>
+<div class="col" style="width:80%">
+<small>
+[Iconfinder.com](`r URL_ICON_CONTENT`)
+</small>
+</div>
+</div>
+
+<div class="container">
+<div class="col" style="width:20%">
+`r img(alt = "Icono 'formato'", src = ICON_FORMAT, height = IMG_HEIGHT_ATTR)`
+</div>
+<div class="col" style="width:80%">
+<small>
+[Iconfinder.com](`r URL_ICON_FORMAT`)
+</small>
+</div>
+</div>
+
+<div class="container">
+<div class="col" style="width:20%">
+`r img(alt = "Flecha animada", src = ICON_DOWNARROW, height = IMG_HEIGHT_ATTR)`
+</div>
+<div class="col" style="width:80%">
+<small>
+[Giphy.com](`r URL_DOWN_ARROW`)
+</small>
+</div>
+</div>
+
+<div class="container">
+<div class="col" style="width:20%">
+`r img(alt = "Sticker 'colaboración'", src = ICON_COLLAB, height = IMG_HEIGHT_ATTR)`
+</div>
+<div class="col" style="width:80%">
+<small>
+[Pngkey.com](`r URL_ICON_COLLAB`)
+</small>
+</div>
+</div>
