@@ -1,0 +1,29 @@
+---
+title: "El nivel ocupacional como covariable en salud mental"
+runninghead: Nivel ocupacional
+journal: "Journal of Aging and Health"
+author:
+- name: Daniel Morillo
+  num: 1, 2
+address:
+- num: 1
+  org: |
+    Centro Colaborador de la OMS, Universidad Autónoma de Madrid.
+    C/Arzobispo Morcillo 4, 28029 Madrid (Spain)
+- num: 2
+  org: Instituto de Investigación de La Princesa
+corrauth: "Daniel Morillo"
+email: daniel.morillo@uam.es
+abstract:   Recodificar la ocupación en niveles ordenados es importantísimo.
+keywords: Rmarkdown, markdown, ejemplo, reproducibilidad
+classoption:
+  - Royal
+  - times
+bibliography: ../Ejemplormarkdown
+bibliographystyle: sageh
+output:
+  rticles::sage_article:
+    keep_tex: yes
+header-includes: 
+- \usepackage{longtable}
+---
