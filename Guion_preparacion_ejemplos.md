@@ -18,6 +18,8 @@
 
 1. Abrir en Rstudio `www\ejemplo_workflow\generacion_variables.Rmd`
 
+1. Ir a carpeta `www\ejemplo_Rmarkdown` en el visor de archivos de Rstudio
+
 1. Abrir el [Manual de sincronización de OneDrive](https://dauam-my.sharepoint.com/personal/marta_miret_uam_es/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fmarta%5Fmiret%5Fuam%5Fes%2FDocuments%2FEdad%20con%20Salud%2FDocumentacion%20Edad%20con%20Salud%2FOtros%2FMigracio%CC%81n%20a%20OneDrive%2FManual%5Fsincronizacio%CC%81n%5FOneDrive%2Epdf&parent=%2Fpersonal%2Fmarta%5Fmiret%5Fuam%5Fes%2FDocuments%2FEdad%20con%20Salud%2FDocumentacion%20Edad%20con%20Salud%2FOtros%2FMigracio%CC%81n%20a%20OneDrive)
    en Chrome
    
