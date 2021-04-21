@@ -1,4 +1,6 @@
 *.docx
 *.md
+*.pdf
+*.tex
 Recoding_occupation_cache
 Recoding_occupation_files
