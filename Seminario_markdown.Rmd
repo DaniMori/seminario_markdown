@@ -7,14 +7,14 @@ output:
   revealjs::revealjs_presentation:
     transition:      slide
     transitionSpeed: slow
-    theme:           league
+    theme:           beige
     highlight:       espresso
     smart:           yes
     center:          no
     incremental:     no
     slide_level:     1
     fig_width:       5.5
-    fig_height:      3.2
+    fig_height:      2.8
     fig_caption:     no
     self_contained:  yes
     reveal_options:
