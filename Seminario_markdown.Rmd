@@ -103,7 +103,7 @@ EXAMPLE_HTML   <- "<center style='color:lightblue'>Estoy centrado y en azul</cen
 EXAMPLE_LaTeX  <- "$Y = \\beta_1 X + \\epsilon$"
 EXAMPLE_WORD   <- "www/sample_wordfile.txt"
 EXAMPLE_MD     <- "https://daringfireball.net/projects/markdown/syntax"
-EXAMPLE_EDITOR <- "https://stackedit.io/app#"
+EXAMPLE_EDITOR <- "https://stackedit.io/app"
 EXAMPLE_YAML   <- "https://bookdown.org/yihui/rmarkdown/pdf-document.html#table-of-contents-1"
 
 IMG_HEIGHT_ATTR <- "43"
@@ -160,7 +160,7 @@ div(
 # Bienvenidos/as
 
 ```{r}
-tags$iframe(src = FILE_PATH_INTERVIEW, width = 800, height = 600)
+tags$iframe(src = FILE_PATH_INTERVIEW, width = 800, height = 560)
 ```
 
 
@@ -229,21 +229,15 @@ Animaciones, columnas
 
 **Markdown** _también_ es...
 
-<div class="fragment">
-- un [_conversor_ a HTML](`r URL_DINGUS`):  
+<div class="fragment" width="100%">
+- un [_conversor_ a HTML](`r URL_DINGUS`)
+</div>
 
 <br>
 
-```{r}
-tags$iframe(
-  src    = URL_DINGUS,
-  width  = "100%",
-  height = 360
-)
-```
+<div class="fragment">
+- (Pero hay otros: [Pandoc](`r URL_PANDOC`))
 </div>
-
-<div class="fragment">Pero hay otros: [Pandoc](`r URL_PANDOC`)</div>
 
 
 # Pandoc
@@ -274,7 +268,7 @@ div(
   tags$iframe(
     src    = URL_PANDOC,
     width  = "100%",
-    height =  400
+    height =  360
   )
 )
 ```
@@ -432,7 +426,7 @@ Es *muy rápido*:
 <div class="container fragment" style="width:50%">
 
 <div class="col">
-`r img(src = ICON_CONTENT, height = 120)`
+`r img(src = ICON_CONTENT, height = 100)`
 </div>
 
 <div class="col"><br>Contenido</div>
@@ -441,14 +435,14 @@ Es *muy rápido*:
 
 
 <div class="fragment">
-`r img(src = ICON_DOWNARROW, height = 120)`
+`r img(src = ICON_DOWNARROW, height = 100)`
 </div>
 
 
 <div class="container fragment" style="width:50%">
 
 <div class="col">
-`r img(src = ICON_FORMAT, height = 120)`
+`r img(src = ICON_FORMAT, height = 100)`
 </div>
 
 <div class="col"><br>Formato</div>
@@ -491,14 +485,8 @@ tags$iframe(src = paste0(EXAMPLE_MD, ".text"), width = "120%", height = 400)
 
 <br>
 
-```{r}
-tags$iframe(
-  class  = "fragment",
-  src    = EXAMPLE_EDITOR,
-  width  = "100%",
-  height = 400
-)
-```
+
+(Aunque hay editores, e.g.: [StackEdit](`r EXAMPLE_EDITOR`))
 
 
 # Pero... {data-transition="fade-in slide-out"}
@@ -732,7 +720,9 @@ leaflet() %>% addTiles() %>%
 tags$iframe(
   src    = FILE_PATH_RMD_EXAMPLE,
   width  = "100%",
-  height = 400
+  height = 400,
+  type   = "text",
+  charset = 'utf-8'
 )
 ```
 
@@ -745,7 +735,8 @@ tags$iframe(
 tags$iframe(
   src    = FILE_PATH_ELSEVIER_EXAMPLE,
   width  = "100%",
-  height = 400
+  height = 400,
+  type   = "text"
 )
 ```
 
@@ -758,7 +749,8 @@ tags$iframe(
 tags$iframe(
   src    = FILE_PATH_SAGE_EXAMPLE,
   width  = "100%",
-  height = 400
+  height = 400,
+  type   = "text"
 )
 ```
 
@@ -803,7 +795,8 @@ tags$iframe(
 tags$iframe(
   src    = FILE_PATH_STATA_EXAMPLE,
   width  = "100%",
-  height = 400
+  height = 400,
+  type   = "text"
 )
 ```
 
@@ -816,7 +809,8 @@ tags$iframe(
 tags$iframe(
   src    = FILE_PATH_WORKFLOW_EXAMPLE,
   width  = "100%",
-  height = 400
+  height = 400,
+  type   = "text"
 )
 ```
 
@@ -827,11 +821,11 @@ Markdown es...
 
 <br>
 
->- legible<br><br><br>  
+>- legible<br><br>  
 
->- productivo<br><br><br>  
+>- productivo<br><br>  
 
->- fácil de editar<br><br><br>  
+>- fácil de editar<br><br>  
 
 >- fácil de mantener
 
@@ -842,11 +836,11 @@ Rmarkdown...
 
 <br>
 
->- es versátil<br><br><br>  
+>- es versátil<br><br>  
 
->- es gratis!<br><br><br>  
+>- es gratis!<br><br>  
 
->- evita trabajo repetitivo<br><br><br>  
+>- evita trabajo repetitivo<br><br>  
 
 >- facilita la _**reproducibilidad**_
 
@@ -868,17 +862,17 @@ Rmarkdown...
 
 # Saber (aún) más
 
-- [Rstudio Education](`r URL_RSTUDIO_EDUC`)<br><br>  
+- [Rstudio Education](`r URL_RSTUDIO_EDUC`)<br>  
 
-- [R for Data Science](`r URL_R4DS`)<br><br>  
+- [R for Data Science](`r URL_R4DS`)<br>  
 
-- [RMarkdown for Scientists](`r URL_RMD_4SC`)<br><br> 
+- [RMarkdown for Scientists](`r URL_RMD_4SC`)<br> 
 
-- [RMarkdown for Medicine](`r URL_RMD_4MED`)<br><br>  
+- [RMarkdown for Medicine](`r URL_RMD_4MED`)<br>  
 
-- [Communicating with RMarkdown](`r URL_COMMUNICATE`)<br><br>  
+- [Communicating with RMarkdown](`r URL_COMMUNICATE`)<br>  
 
-- [Advanced RMarkdown Workshop](`r URL_ADV_WORKSHOP`)<br><br>  
+- [Advanced RMarkdown Workshop](`r URL_ADV_WORKSHOP`)<br>  
 
 
 # "Retos"
@@ -896,7 +890,7 @@ Rmarkdown...
 
 # "Retos"
 
-## Nivel 1: Instalar entorno Rstudio
+## Nivel 2: Instalar entorno Rstudio
 
 - [R](`r URL_CRAN`) (elige Sistema Operativo)<br>  
 
@@ -918,6 +912,8 @@ install_tinytex()
 
 ## Nivel 3: Replicar guía de instalación de OneDrive
 
+<small>
+
 - Instala [revealjs](`r URL_REVEALJS_PKG`) desde Rstudio:
 
 ```{r eval=FALSE, echo=TRUE}
@@ -933,6 +929,8 @@ para usarlo como plantilla
 
 - Usando la plantilla y las imágenes, replica en Rmarkdown la
 [`Guía de sincronización de OneDrive`](`r URL_ONEDRIVE_DOC`)
+
+</small>
 
 
 # FIN
