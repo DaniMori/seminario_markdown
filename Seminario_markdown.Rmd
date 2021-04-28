@@ -40,7 +40,7 @@ FILE_PATH_SAGE_EXAMPLE     <- "www/ejemplo_Rmarkdown/Sage_submission/Sage_submis
 FILE_PATH_STATA_EXAMPLE    <- "www/ejemplo_con_Stata/sorpresa_agradable.Rmd"
 FILE_PATH_WORKFLOW_EXAMPLE <- "www/ejemplo_workflow/generacion_variables.Rmd"
 
-LOGO_MARKDOWN  <- "www/assets/markdown-mark-white.svg"
+LOGO_MARKDOWN  <- "www/assets/md_logo.png"
 LOGO_RMARKDOWN <- "www/assets/rmarkdown_logo.png"
 LOGO_R         <- "www/assets/R_logo.png"
 
@@ -99,7 +99,7 @@ URL_LOGO_RMD     <- "https://rstudio.com/"
 URL_LOGO_R       <- "https://www.r-project.org/logo/"
 URL_DOWN_ARROW   <- "https://media.giphy.com/media/9PekRRQ0WlrRVwynAk/giphy.gif"
 
-EXAMPLE_HTML   <- "<center style='color:lightblue'>Estoy centrado y en azul</center>"
+EXAMPLE_HTML   <- "<center style='color:darkblue'>Estoy centrado y en azul</center>"
 EXAMPLE_LaTeX  <- "$Y = \\beta_1 X + \\epsilon$"
 EXAMPLE_WORD   <- "www/sample_wordfile.txt"
 EXAMPLE_MD     <- "https://daringfireball.net/projects/markdown/syntax"
