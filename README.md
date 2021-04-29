@@ -78,7 +78,7 @@ en el servidor OneDrive de la Universidad Autónoma de Madrid.
 
 - Tener esta carpeta [sincronizada localmente][2]
 
-[@]: https://support.microsoft.com/es-es/office/agregar-carpetas-compartidas-a-onedrive-y-sincronizarlas-8a63cd47-1526-4cd8-bd09-ee3f9bfc1504
+[2]: https://support.microsoft.com/es-es/office/agregar-carpetas-compartidas-a-onedrive-y-sincronizarlas-8a63cd47-1526-4cd8-bd09-ee3f9bfc1504
 
 - Sustituir en la línea 8 los caracteres `<BASE_DIR>`
 (con los símbolos `<>` incluidos, pero dejando las comillas `"`)

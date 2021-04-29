@@ -1,8 +1,8 @@
 # Preparación
 
-1. Abrir presentación HTML en Firefox [warn_browser]
+1. Abrir presentación HTML en Firefox [^warn_browser]
 
-[warn_browser]: Algunos elementos embebidos
+[^warn_browser]: Algunos elementos embebidos
 (i.e. entrevista de muestreo de experiencias) no funcionan en Chrome, MS Edge,
 o MS Explorer, pero sí en Firefox.
 
