@@ -6,14 +6,14 @@ institute:    CCOMS, Universidad Autónoma de Madrid
 bibliography: Ejemplormarkdown.bib
 csl:          vancouver-superscript-brackets-only-year.csl
 output:
-  word_document:
-    toc:      yes
-    df_print: kable
-    keep_md:  yes
   html_document:
     df_print:  paged
     toc:       yes
     toc_float: yes
+  word_document:
+    toc:      yes
+    df_print: kable
+    keep_md:  yes
   pdf_document:
     toc:      yes
     df_print: kable
