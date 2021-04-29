@@ -87,7 +87,7 @@ URL_TINYTEX       <- "https://yihui.org/tinytex/"
 URL_REVEALJS_PKG  <- "https://cran.r-project.org/web/packages/revealjs/index.html"
 URL_INTERVIEW     <- "https://github.com/DaniMori/seminario_markdown/blob/master/www/Protocolo_entrevista_experiencias.Rmd"
 URL_STUDIO_PROJ   <- "https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects"
-URL_ONEDRIVE_DOC  <- "https://dauam-my.sharepoint.com/:b:/r/personal/marta_miret_uam_es/Documents/Edad%20con%20Salud/Documentacion%20Edad%20con%20Salud/Otros/Migracio%CC%81n%20a%20OneDrive/Manual_sincronizacio%CC%81n_OneDrive.pdf?csf=1&web=1&e=pVPN1a"
+URL_ONEDRIVE_DOC  <- "https://dauam-my.sharepoint.com/:b:/r/personal/marta_miret_uam_es/Documents/Edad%20con%20Salud/Documentacion%20Edad%20con%20Salud/Documentaci%C3%B3n%20transversal/Migracio%CC%81n%20a%20OneDrive/Manual_sincronizacio%CC%81n_OneDrive.pdf?csf=1&web=1&e=82zxMi"
 URL_IMAGES_GITHUB <- "https://github.com/DaniMori/seminario_markdown/tree/master/www/oneDrive_img"
 URL_R4DS          <- "https://r4ds.had.co.nz/"
 
