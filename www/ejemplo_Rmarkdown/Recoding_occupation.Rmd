@@ -4,7 +4,7 @@ author:       "Daniel Morillo"
 date:         "`r format(lubridate::today(), '%d de %B de %Y')`"
 institute:    CCOMS, Universidad Autónoma de Madrid
 bibliography: Ejemplormarkdown.bib
-csl:          vancouver-superscript-brackets-only-year.csl
+csl:          apa-old-doi-prefix.csl
 output:
   html_document:
     df_print:  paged
